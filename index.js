@@ -8,7 +8,7 @@ const emotes = [
     "https://static-cdn.jtvnw.net/emoticons/v2/301622790/default/dark/3.0",
     "https://cdn.7tv.app/emote/60bd31df45d2e7506fe2a018/3x",
     "https://cdn.7tv.app/emote/618db963d34608492cc2d6fb/3x",
-    "https://cdn.frankerfacez.com/emote/128054/3",
+    "https://cdn.frankerfacez.com/emote/128054/4",
     "https://cdn.betterttv.net/emote/6194b95354f3344f8805fd7b/3x",
     "https://cdn.betterttv.net/emote/60d211128ed8b373e4217d8b/3x",
     "https://cdn.betterttv.net/emote/61060daa2d1eba5400d2bbad/3x",
@@ -33,8 +33,8 @@ const emotes = [
     "https://cdn.betterttv.net/emote/610f7d9e76ea4e2b9f760126/3x",
     "https://cdn.betterttv.net/emote/5f076ee2a2ac620530366f7a/3x",
     "https://cdn.betterttv.net/emote/5e500538e383e37d5d9dd3ec/3x",
-    "https://cdn.frankerfacez.com/emote/262149/3",
-    "https://cdn.frankerfacez.com/emote/229486/3"
+    "https://cdn.frankerfacez.com/emote/262149/4",
+    "https://cdn.frankerfacez.com/emote/229486/4"
 ];
 
 (function ($, window, undefined) {
