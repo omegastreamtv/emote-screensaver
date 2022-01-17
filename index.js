@@ -34,7 +34,25 @@ const emotes = [
     "https://cdn.betterttv.net/emote/5f076ee2a2ac620530366f7a/3x",
     "https://cdn.betterttv.net/emote/5e500538e383e37d5d9dd3ec/3x",
     "https://cdn.frankerfacez.com/emote/262149/4",
-    "https://cdn.frankerfacez.com/emote/229486/4"
+    "https://cdn.frankerfacez.com/emote/229486/4",
+    "https://cdn.7tv.app/emote/615636736251d7e000db35ec/3x",
+    "https://cdn.7tv.app/emote/60caf39c3591d98c4059c5c0/3x",
+    "https://cdn.betterttv.net/emote/61cd58a7c8cc7f36d52b01a9/3x",
+    "https://cdn.betterttv.net/emote/609431bc39b5010444d0cbdc/3x",
+    "https://cdn.betterttv.net/emote/603451b77c74605395f3295d/3x",
+    "https://cdn.betterttv.net/emote/5ffd66da465444316bf608ab/3x",
+    "https://cdn.betterttv.net/emote/608c699d39b5010444d094ef/3x",
+    "https://cdn.betterttv.net/emote/618019f01f8ff7628e6beb1a/3x",
+    "https://cdn.betterttv.net/emote/61cef923c8cc7f36d52b2168/3x",
+    "https://cdn.betterttv.net/emote/5fa01b3740eb9502e22399bb/3x",
+    "https://cdn.betterttv.net/emote/5f99d6d3710f8302f0c96316/3x",
+    "https://cdn.betterttv.net/emote/603fcd96306b602acc59651e/3x",
+    "https://cdn.betterttv.net/emote/60b5121ff8b3f62601c363a2/3x",
+    "https://cdn.betterttv.net/emote/5f9b383540eb9502e2234d56/3x",
+    "https://cdn.betterttv.net/emote/60ff190b2d1eba5400d1b4b6/3x",
+    "https://cdn.betterttv.net/emote/617fba2c1f8ff7628e6be0da/3x",
+    "https://cdn.betterttv.net/emote/617fba081f8ff7628e6be0cb/3x"
+
 ];
 
 (function ($, window, undefined) {
@@ -42,7 +60,7 @@ const emotes = [
         var settings = $.extend({
             horizontal: true,
             vertical: true,
-            speed: 100, // In pixels per second
+            speed: 50, // In pixels per second
             container: $(this).parent(),
             bumpEdge: function () { }
         }, options);
