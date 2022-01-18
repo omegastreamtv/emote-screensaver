@@ -55,6 +55,73 @@ const emotes = [
 
 ];
 
+let emoteData = [];
+(async () => {
+    let bttvFetch = await fetch(`https://api.betterttv.net/3/cached/users/twitch/38746172`);
+    let bttvData = await bttvFetch.json();
+
+    let bttvGlobalDataFetch = await fetch("https://api.betterttv.net/3/cached/emotes/global");
+    let bttvGlobalData = await bttvGlobalDataFetch.json();
+
+    let ffzDataFetch = await fetch(`https://api.betterttv.net/3/cached/frankerfacez/users/twitch/38746172`);
+    let ffzData = await ffzDataFetch.json();
+
+    // Fetching channel and shared BTTV emotes
+    if (bttvData) {
+        for (let i = 0; i < bttvData["channelEmotes"].length; i++) {
+            emoteData.push(`https://cdn.betterttv.net/emote/${bttvData["channelEmotes"][i]["id"]}/3x`);
+        }
+        for (let i = 0; i < bttvData["sharedEmotes"].length; i++) {
+            emoteData.push(`https://cdn.betterttv.net/emote/${bttvData["sharedEmotes"][i]["id"]}/3x`);
+        }
+    }
+
+    // BTTV Global emotes
+    if (bttvGlobalData) {
+        for (let i = 0; i < bttvGlobalData.length; i++) {
+            emoteData.push(`https://cdn.betterttv.net/emote/${bttvGlobalData[i]["id"]}/3x`);
+        }
+    }
+
+    // Fetching FFZ emotes
+    if (ffzData) {
+        for (let i = 0; i < ffzData.length; i++) {
+            emoteData.push(`https://cdn.betterttv.net/frankerfacez_emote/${ffzData[i]["id"]}/4`);
+        }
+    }
+
+    let sevenTVDataFetch = await fetch("https://api.7tv.app/v2/users/esfandtv/emotes");
+    let sevenTVData = await sevenTVDataFetch.json();
+    if (sevenTVData) {
+        for (let i = 0; i < sevenTVData.length; i++) {
+            emoteData.push(`https://cdn.7tv.app/emote/${sevenTVData[i]["id"]}/4x`);
+        }
+    }
+
+    var subemotes = [
+        "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_af715ca82e9145719203afa76710b08c/default/dark/3.0",
+        "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_fb1673c5061b4286a802b8b549c91196/default/dark/3.0",
+        "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_21f1b9cecdd44355961d343f6e88789d/default/dark/3.0",
+        "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_38b199e51ccb4d57aeca1ea21354aa8a/default/dark/3.0",
+        "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_53463131dd7c46dfb74ef209e25d2ab6/default/dark/3.0",
+        "https://static-cdn.jtvnw.net/emoticons/v2/1930760/default/dark/3.0",
+        "https://static-cdn.jtvnw.net/emoticons/v2/300202982/default/dark/3.0",
+        "https://static-cdn.jtvnw.net/emoticons/v2/1088670/default/dark/3.0",
+        "https://static-cdn.jtvnw.net/emoticons/v2/307047539/default/dark/3.0",
+        "https://static-cdn.jtvnw.net/emoticons/v2/303197049/default/dark/3.0",
+        "https://static-cdn.jtvnw.net/emoticons/v2/301081259/default/dark/3.0",
+        "https://static-cdn.jtvnw.net/emoticons/v2/301580956/default/dark/3.0",
+        "https://static-cdn.jtvnw.net/emoticons/v2/1086325/default/dark/3.0",
+        "https://static-cdn.jtvnw.net/emoticons/v2/301580967/default/dark/3.0",
+        "https://static-cdn.jtvnw.net/emoticons/v2/301088765/default/dark/3.0",
+        "https://static-cdn.jtvnw.net/emoticons/v2/301622790/default/dark/3.0",
+        "https://static-cdn.jtvnw.net/emoticons/v2/305361345/default/dark/3.0",
+        "https://static-cdn.jtvnw.net/emoticons/v2/304334024/default/dark/3.0"
+    ];
+
+    emoteData.push(...subemotes);
+})();
+
 (function ($, window, undefined) {
     $.fn.marqueeify = function (options) {
         var settings = $.extend({
@@ -138,7 +205,7 @@ $(document).ready(function () {
     $('.marquee').marqueeify({
         speed: 150,
         bumpEdge: function () {
-            $('img').attr('src', emotes[Math.floor(Math.random() * emotes.length)]);
+            $('img').attr('src', emoteData[Math.floor(Math.random() * emoteData.length)]);
         }
     });
 });
