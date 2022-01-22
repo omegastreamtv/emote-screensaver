@@ -1,4 +1,10 @@
+@font-face {
+  font-family: "outfit";
+  src: url("outfit.ttf");
+}
+
 html,
+
 body {
   height: 100%;
   width: 100%;
@@ -20,4 +26,22 @@ img {
   -o-transform: scale(1.4);
   -webkit-transform: scale(1.4);
   transform: scale(1.4);
+}
+
+.title {
+  color: white;
+  text-align: center;
+  font-size: 3.5em;
+  font-weight: bold;
+  margin: 0;
+  font-family: "outfit", "Outfit", serif;
+}
+
+.emoteName {
+  margin: 0;
+  color: white;
+  text-align: center;
+  font-size: 3em;
+  font-family: "outfit", "Outfit", serif;
+  text-shadow: 3px 5px #000000;
 }
