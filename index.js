@@ -70,11 +70,9 @@ let emoteData = [];
     if (bttvData) {
         for (let i = 0; i < bttvData["channelEmotes"].length; i++) {
             emoteData.push({ name: bttvData["channelEmotes"][i]["code"], link: `https://cdn.betterttv.net/emote/${bttvData["channelEmotes"][i]["id"]}/3x` });
-            console.log(bttvData["channelEmotes"][i]["code"])
         }
         for (let i = 0; i < bttvData["sharedEmotes"].length; i++) {
             emoteData.push({ name: bttvData["sharedEmotes"][i]["code"], link: `https://cdn.betterttv.net/emote/${bttvData["sharedEmotes"][i]["id"]}/3x` });
-            console.log(bttvData["sharedEmotes"][i]["code"])
         }
     }
 
@@ -82,7 +80,6 @@ let emoteData = [];
     if (bttvGlobalData) {
         for (let i = 0; i < bttvGlobalData.length; i++) {
             emoteData.push({ name: bttvGlobalData[i]["code"], link: `https://cdn.betterttv.net/emote/${bttvGlobalData[i]["id"]}/3x` });
-            console.log(bttvGlobalData[i]["code"])
         }
     }
 
@@ -102,24 +99,14 @@ let emoteData = [];
     }
 
     // {name: "", link: ""}
-    var subemotes = [
-        { name: "esfandW", link: "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_e1771d069fe940c7aa983a91d56ce4e4/default/dark/3.0" },
-        { name: "esfandPls", link: "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_38b199e51ccb4d57aeca1ea21354aa8a/default/dark/3.0" },
-        { name: "esfandPog", link: "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_33ed49acc9dd47eca43b4bee741d73b3/default/dark/3.0" },
-        { name: "esfandFlick", link: "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_fb1673c5061b4286a802b8b549c91196/default/dark/3.0" },
-        { name: "esfandH", link: "https://static-cdn.jtvnw.net/emoticons/v2/1086325/default/dark/3.0" },
-        { name: "esfandScoots", link: "https://static-cdn.jtvnw.net/emoticons/v2/305361345/default/dark/3.0" },
-        { name: "esfandCozy", link: "https://static-cdn.jtvnw.net/emoticons/v2/301081259/default/dark/3.0" },
-        { name: "esfandEZ", link: "https://static-cdn.jtvnw.net/emoticons/v2/301580956/default/dark/3.0" },
-        { name: "esfandF", link: "https://static-cdn.jtvnw.net/emoticons/v2/1086243/default/dark/3.0" },
-        { name: "esfandTonys", link: "https://static-cdn.jtvnw.net/emoticons/v2/301622790/default/dark/3.0" },
-        { name: "esfandHowdy", link: "https://static-cdn.jtvnw.net/emoticons/v2/300504710/default/dark/3.0" },
-        { name: "esfandVIBE", link: "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_53463131dd7c46dfb74ef209e25d2ab6/default/dark/3.0" },
-        { name: "esfandW", link: "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_e1771d069fe940c7aa983a91d56ce4e4/default/dark/3.0" }
+    let subemotes = await fetch("https://api.retpaladinbot.com/emotes/esfandtv");
+    let subData = await subemotes.json();
+    if (subData) {
+        for (let i = 0; i < subData["data"].length; i++) {
+            emoteData.push({ name: subData["data"][i]["Name"], link: subData["data"][i]["URL"] })
+        }
+    }
 
-    ];
-
-    emoteData.push(...subemotes);
 })();
 
 (function ($, window, undefined) {
