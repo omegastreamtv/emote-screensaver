@@ -1,0 +1,196 @@
+:root {
+  --gallery-cols: 6;
+  --gallery-gap: 7px;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  min-height: 100%;
+  overflow: hidden;
+  position: relative;
+  background: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Bahnschrift Condensed", Arial, sans-serif;
+}
+
+p, span, input {
+  font-family: Arial, sans-serif;
+  font-size: 0.95rem;
+  line-height: 14pt;
+}
+
+img {
+  display: block;
+  width: 100%;
+}
+
+#home #content,
+#loading {
+  width: 50%;
+  max-width: 500px;
+}
+
+#loading img {
+  border: 3px solid black;
+  padding: 30px;
+  width: 265px
+}
+
+#overlay {
+  #settings-btn {
+    border: none;
+    background: none;
+  }
+
+  #emote-name {
+    top: 10px;
+    color: white;
+    font-size: 3em;
+    font-weight: 700;
+    z-index: 1;
+  }
+
+  .anim-wrapper-h,
+  .anim-wrapper-v {
+    width: 100px;
+    height: 100px;
+    display: block;
+    position: absolute;
+  }
+  
+  .anim-wrapper-h {
+    animation: emoteTranslateH linear infinite alternate;
+  }
+  
+  .anim-wrapper-v {
+    animation: emoteTranslateV linear infinite alternate;
+  }
+}
+
+#gallery {
+  display: grid;
+  grid-template-columns: repeat(var(--gallery-cols), calc((100% / var(--gallery-cols)) - var(--gallery-gap) * (var(--gallery-cols) - 1) / var(--gallery-cols)));
+  grid-auto-rows: 120px;
+  gap: var(--gallery-gap);
+
+  .emote {
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgb(0 0 0 / 6%);
+    }
+
+    img {
+      width: auto;
+      max-height: 60px;
+      max-width: 90%;
+    }
+
+    &.selected {
+      background-color: rgb(0 142 255 / 10%);
+      border: 1px solid #0d6efd;
+
+      &:hover {
+        background-color: rgb(13 110 253 / 14%);
+      }
+    }
+  }
+}
+
+.drop-shadow {
+  text-shadow: 3px 5px #00000077;
+}
+
+.modal {
+  .modal-header,
+  .modal-footer {
+    padding: 0.5rem;
+  }
+
+  .modal-header {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .modal-content {
+    height: 80vh;
+
+    .modal-body {
+      overflow-y: scroll;
+      overflow-x: hidden;
+      @extend .minimal-scrollbar;
+    }
+  }
+}
+
+.form-label,
+.form-check-label {
+  font-size: 1rem;
+  margin-bottom: 0 !important;
+}
+
+.form-range {
+  margin-bottom: 1.3rem;
+}
+
+.form-check.form-switch {
+  display: flex;
+  align-items: flex-end;
+
+  input[type=checkbox] {
+    width: 42px;
+    height: 22px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+}
+
+.minimal-scrollbar {
+  scrollbar-color: #999 #333;
+
+  &::-webkit-scrollbar {
+    width: 14px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgb(134, 134, 134);
+    border-radius: 7px;
+  }
+  &::-webkit-scrollbar-track {
+    background: rgb(216, 216, 216);
+  }
+}
+
+.btn-group > .btn:not(:last-child):not(.dropdown-toggle) {
+  z-index: 1;
+  border-right: 1px solid rgb(255 255 255 / 24%);
+}
+
+@keyframes emoteTranslateH {
+  from { left: 0px; }
+  to {
+    left: 100%;
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes emoteTranslateV {
+  from { top: 0vh; }
+  to {
+    top: 100vh;
+    transform: translateY(-100%);
+  }
+}
+
+@import '~bootstrap/scss/bootstrap.scss';
