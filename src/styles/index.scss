@@ -31,12 +31,6 @@ img {
   max-width: 500px;
 }
 
-#loading img {
-  border: 3px solid black;
-  padding: 30px;
-  width: 265px
-}
-
 #overlay {
   #settings-btn {
     border: none;
@@ -45,7 +39,6 @@ img {
 
   #emote-name {
     top: 10px;
-    color: white;
     font-size: 3em;
     font-weight: 700;
     z-index: 1;
@@ -153,6 +146,7 @@ img {
 }
 
 .drop-shadow {
+  color: #ffffff;
   text-shadow: 3px 5px #00000077;
 }
 
