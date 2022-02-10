@@ -1,4 +1,5 @@
 const defaults = {
+  channel: null,
   textSize: 48,
   emoteSize: 100,
   emoteSpeed: 50,
@@ -7,11 +8,12 @@ const defaults = {
   emotes: [],
 };
 
-const loadSettings = (requestedEmotes) => {
+const loadSettings = (requestedEmotes, channel) => {
   const settings = JSON.parse(localStorage.getItem('settings'));
 
-  if (!settings) {
+  if (!settings || channel.toLowerCase() !== settings.channel) {
     const newSettings = Object.assign({}, defaults, {
+      channel: channel.toLowerCase(),
       emotes: requestedEmotes,
     });
     localStorage.setItem('settings', JSON.stringify(newSettings));
