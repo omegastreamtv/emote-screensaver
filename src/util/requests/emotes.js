@@ -1,4 +1,5 @@
 import axios from 'axios';
+import 'allsettled-polyfill';
 
 const urls = {
   twitch: {
