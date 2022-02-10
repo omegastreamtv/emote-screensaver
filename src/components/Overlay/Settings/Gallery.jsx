@@ -33,7 +33,7 @@ const EmoteGallery = ({ emotes, toggleEmote }) => {
   }, [emotes]);
 
   return (
-    <Accordion id="gallery" defaultActiveKey={['twitch']} alwaysOpen>
+    <Accordion id="gallery" alwaysOpen>
       {groups.map((group) => (
         <GalleryGroup
           key={`${group.service}_${group.scope}`}
