@@ -58,7 +58,7 @@ function mapEmoteData(data, service, type, nameProp) {
   return (
     data.map((emote) => ({
       name: emote[nameProp],
-      url: urls[service].cdn(emote.id),
+      url: getCdnUrl(emote, service),
       service: service === 'stv' ? '7tv' : service,
       scope: type,
       zeroWidth: isZeroWidth(emote, emote[nameProp]),
@@ -90,6 +90,12 @@ function getBttvChannelEmotes(channelId) {
 
     return channelEmotes.concat(sharedEmotes);
   });
+}
+
+function getCdnUrl(emote, service) {
+  return service === 'twitch' && emote.format?.includes('animated')
+    ? urls[service].cdn(emote.id).replace(/\/static\//, '/animated/')
+    : urls[service].cdn(emote.id);
 }
 
 function isZeroWidth(emote, name) {
