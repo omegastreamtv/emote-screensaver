@@ -10,7 +10,7 @@ const properNames = {
 };
 
 const GalleryGroup = ({ service, scope, emotes, idxOffset, toggleEmote }) => (
-  <Accordion.Item className="gallery-group" eventKey={service}>
+  <Accordion.Item className="gallery-group" eventKey={service + scope}>
     <Accordion.Header className="group-title">{`${properNames[service]} (${properNames[scope]})`}</Accordion.Header>
     <Accordion.Body className="emote-group">
       {emotes.map((emote, i) => (
