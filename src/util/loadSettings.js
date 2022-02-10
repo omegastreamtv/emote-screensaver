@@ -11,7 +11,12 @@ const loadSettings = (requestedEmotes) => {
   const settings = JSON.parse(localStorage.getItem('settings'));
 
   if (!settings) {
-    return Object.assign({}, defaults, { emotes: requestedEmotes });
+    const newSettings = Object.assign({}, defaults, {
+      emotes: requestedEmotes,
+    });
+    localStorage.setItem('settings', JSON.stringify(newSettings));
+
+    return newSettings;
   }
 
   const updatedEmotes = requestedEmotes.map((emote) => ({
@@ -21,7 +26,7 @@ const loadSettings = (requestedEmotes) => {
     )?.selected,
   }));
 
-  return Object.assign({}, settings, { emotes: updatedEmotes });
+  return Object.assign({}, defaults, settings, { emotes: updatedEmotes });
 };
 
 export default loadSettings;
