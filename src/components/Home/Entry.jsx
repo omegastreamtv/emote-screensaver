@@ -53,10 +53,46 @@ const Entry = () => {
           Click anywhere on the screen to open and change your settings.
         </li>
       </ol>
-      <p className="body-text">
+      <p className="body-text mb-5">
         Leave the option "Shutdown source when not visible" unchecked or the
         page will break after switching scenes.
       </p>
+      <div className="footer body-text text-black-50 text-center">
+        <a
+          href="https://github.com/Mahcks/YEAHBUTDVDs"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img
+            src="https://cdn.onlinewebfonts.com/svg/img_44605.png"
+            alt="GitHub"
+            className="mb-3"
+            rel="noreferrer"
+          />
+        </a>
+        <p>
+          <span>Made with </span>
+          <img
+            src="https://static-cdn.jtvnw.net/emoticons/v2/300272604/static/light/1.0"
+            alt="love"
+            className="inline-icon"
+            title="esfandL"
+          />
+          <span> by </span>
+          <a
+            href="https://twitch.tv/chudbungus"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Chud Bungus
+          </a>
+          <span> and </span>
+          <a href="https://github.com/mahcks" target="_blank" rel="noreferrer">
+            Mahcksimus
+          </a>
+          <span>.</span>
+        </p>
+      </div>
     </>
   );
 };

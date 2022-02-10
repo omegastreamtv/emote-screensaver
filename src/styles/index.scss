@@ -20,6 +20,10 @@ p, span, input {
   line-height: 14pt;
 }
 
+a {
+  text-decoration: none !important;
+}
+
 img {
   display: block;
   width: 100%;
@@ -27,8 +31,20 @@ img {
 
 #home #content,
 #loading {
-  width: 50%;
-  max-width: 500px;
+  width: 500px;
+}
+
+#home .footer {
+  img {
+    width: 30px;
+    display: inline-block;
+  }
+
+  .inline-icon {
+    width: 22px;
+    display: inline-block;
+    margin-top: -5px;
+  }
 }
 
 #overlay {
@@ -148,6 +164,10 @@ img {
 .drop-shadow {
   color: #ffffff;
   text-shadow: 3px 5px #000000;
+}
+
+.text-black-50 a {
+  color: #75acff;
 }
 
 .modal {
