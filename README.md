@@ -9,3 +9,5 @@ Built in a way that allows streamers to ***change emotes and other settings dire
 - Add a new browser source to OBS using your personalized channel URL.
 - With the new source selected, click the "interact" button to view the page in interactive mode.
 - Click anywhere on the screen to open and change your settings.
+
+Leave the option "Shutdown source when not visible" unchecked or the page will break after switching scenes.

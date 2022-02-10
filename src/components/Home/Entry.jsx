@@ -53,6 +53,10 @@ const Entry = () => {
           Click anywhere on the screen to open and change your settings.
         </li>
       </ol>
+      <p className="body-text">
+        Leave the option "Shutdown source when not visible" unchecked or the
+        page will break after switching scenes.
+      </p>
     </>
   );
 };
