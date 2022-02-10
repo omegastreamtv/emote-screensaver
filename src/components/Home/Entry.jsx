@@ -40,23 +40,6 @@ const Entry = () => {
         </Form>
         {validateText && <p className="text-danger">{validateText}</p>}
       </div>
-      <h5>Instructions</h5>
-      <ol>
-        <li className="body-text">
-          Add a new browser source to OBS using your personalized channel URL.
-        </li>
-        <li className="body-text">
-          With the new source selected, click the "interact" button to view the
-          page in interactive mode.
-        </li>
-        <li className="body-text">
-          Click anywhere on the screen to open and change your settings.
-        </li>
-      </ol>
-      <p className="body-text mb-5">
-        Leave the option "Shutdown source when not visible" unchecked or the
-        page will break after switching scenes.
-      </p>
       <div className="footer body-text text-black-50 text-center">
         <a
           href="https://github.com/Mahcks/YEAHBUTDVDs"

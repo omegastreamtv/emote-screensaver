@@ -3,6 +3,7 @@ import useEmote from '../../util/hooks/useEmote';
 import settingsReducer from '../../util/hooks/useSettings';
 
 import Emote from './Emote';
+import Instructions from './Instructions';
 import Settings from './Settings/Settings';
 
 const Overlay = ({ settings: initialSettings }) => {
@@ -32,6 +33,7 @@ const Overlay = ({ settings: initialSettings }) => {
         id="settings-btn"
         className="vw-100 vh-100"
         onClick={() => showSettings(true)}
+        disabled={settings.showHelp}
       />
       <h1
         id="emote-name"
@@ -41,6 +43,7 @@ const Overlay = ({ settings: initialSettings }) => {
       >
         {emote ? emote.name : initialSettings.emotes[0].name}
       </h1>
+      {settings.showHelp && <Instructions update={updateSettings} />}
       <Emote
         url={emote ? emote.url : initialSettings.emotes[0].url}
         speed={settings.emoteSpeed}

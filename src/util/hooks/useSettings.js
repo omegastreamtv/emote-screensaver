@@ -10,6 +10,8 @@ const settingsReducer = (state, action) => {
       return { ...state, emoteSpeed: action.value };
     case 'setEmoteDefault':
       return { ...state, emoteDefault: action.value };
+    case 'toggleHelp':
+      return { ...state, showHelp: action.value };
     case 'toggleEmote':
       let emotes = [...state.emotes];
       emotes[action.value].selected = !emotes[action.value].selected;

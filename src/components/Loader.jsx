@@ -25,7 +25,7 @@ const Loader = () => {
       })
       .then((newEmotes) => {
         setStatusText('Loading preferences');
-        setSettings(loadSettings(newEmotes));
+        setSettings(loadSettings(newEmotes, params.channelName));
       })
       .catch(() => navigate('/channel-not-found'));
   }, [params.channelName, navigate]);

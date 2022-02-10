@@ -29,6 +29,11 @@ const Settings = ({ data, update, visible, show }) => {
       value: scaleVal(val, 0, 100, SIZE_MIN, SIZE_MAX),
     });
 
+  const showHelp = () => {
+    show(false);
+    update({ type: 'toggleHelp', value: true });
+  };
+
   const saveAndClose = () => {
     localStorage.setItem('settings', JSON.stringify(data));
     show(false);
@@ -90,7 +95,10 @@ const Settings = ({ data, update, visible, show }) => {
           toggleEmote={(idx) => update({ type: 'toggleEmote', value: idx })}
         />
       </Modal.Body>
-      <Modal.Footer>
+      <Modal.Footer className="justify-content-between">
+        <span className="text-link" onClick={() => showHelp()}>
+          Show help
+        </span>
         <Button
           variant="primary"
           disabled={!allowSave}
