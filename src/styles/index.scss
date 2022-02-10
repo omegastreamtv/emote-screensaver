@@ -73,11 +73,49 @@ img {
   background-color: #ffffff;
 }
 
-#gallery {
+.gallery-group {
+  &:first-child {
+    margin-top: 0px;
+  }
+
+  &:last-child .group-title {
+    border-bottom: none;
+  }
+
+  &.accordion-item {
+    border: none;
+
+    .accordion-button {
+      padding: 12px 0px 8px;
+
+      &:focus {
+        box-shadow: none;
+      }
+
+      &:not(.collapsed) {
+        background: none;
+        box-shadow: none;
+      }
+    }
+    .accordion-body {
+      padding: 15px 0px;
+    }
+  }
+
+  .group-title {
+    padding: 3px 0px;
+    position: sticky;
+    top: 30px;
+    background-color: #fff;
+    border-bottom: 1px solid #e3e3e3;
+  }
+}
+
+.emote-group {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 120px);
+  grid-template-columns: repeat(6, 1fr);
   grid-auto-rows: 120px;
-  gap: 6px;
+  gap: 7px;
 
   .emote {
     display: flex;
