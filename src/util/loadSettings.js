@@ -3,6 +3,7 @@ const defaults = {
   emoteSize: 100,
   emoteSpeed: 50,
   emoteDefault: true,
+  showHelp: true,
   emotes: [],
 };
 
