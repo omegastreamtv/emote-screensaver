@@ -6,7 +6,7 @@ const GalleryMenu = ({ update }) => {
     update({ type: 'toggleEmoteGroup', service, scope, state });
 
   return (
-    <div id="gallery-menu" className="mb-2 py-2 sticky-top">
+    <div id="gallery-menu" className="py-2 sticky-top">
       <ButtonGroup className="me-2">
         <Button
           variant="primary"
