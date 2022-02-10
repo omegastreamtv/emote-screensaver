@@ -6,7 +6,7 @@ const GalleryMenu = ({ update }) => {
     update({ type: 'toggleEmoteGroup', service, scope, state });
 
   return (
-    <div className="mb-2">
+    <div id="gallery-menu" className="py-2 sticky-top">
       <ButtonGroup className="me-2">
         <Button
           variant="primary"
@@ -23,6 +23,11 @@ const GalleryMenu = ({ update }) => {
           Deselect All
         </Button>
       </ButtonGroup>
+      <EmoteGroupDropdown
+        title="Twitch"
+        toggle={toggleEmoteGroup}
+        channelOnly
+      />
       <EmoteGroupDropdown title="7TV" toggle={toggleEmoteGroup} />
       <EmoteGroupDropdown title="BTTV" toggle={toggleEmoteGroup} />
       <EmoteGroupDropdown title="FFZ" toggle={toggleEmoteGroup} />
