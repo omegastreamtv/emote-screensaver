@@ -1,6 +1,8 @@
 import axios from 'axios';
 import 'allsettled-polyfill';
 
+const bttvZeroWidth = ['SoSnowy', 'IceCold', 'cvHazmat', 'cvMask'];
+
 const urls = {
   twitch: {
     channel: (channelName) =>
@@ -59,7 +61,7 @@ function mapEmoteData(data, service, type, nameProp) {
       url: urls[service].cdn(emote.id),
       service: service === 'stv' ? '7tv' : service,
       scope: type,
-      zeroWidth: !!emote?.visibility_simple?.includes('ZERO_WIDTH'),
+      zeroWidth: isZeroWidth(emote, emote[nameProp]),
       selected: true,
     })) || []
   );
@@ -88,4 +90,11 @@ function getBttvChannelEmotes(channelId) {
 
     return channelEmotes.concat(sharedEmotes);
   });
+}
+
+function isZeroWidth(emote, name) {
+  return (
+    !!emote?.visibility_simple?.includes('ZERO_WIDTH') ||
+    bttvZeroWidth.includes(name)
+  );
 }
