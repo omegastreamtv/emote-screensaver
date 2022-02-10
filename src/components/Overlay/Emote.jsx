@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 
-const MAX_HEIGHT = 100;
-const MAX_WIDTH = 200;
+const MAX_WIDTH_RATIO = 2;
 
 const getDurationX = (speed) => window.innerWidth / speed;
 const getDurationY = (speed) => window.innerHeight / speed;
@@ -30,15 +29,16 @@ const Emote = ({ url, speed, size, onBounce }) => {
     image.src = url;
     image.onload = () => {
       const aspectRatio = image.width / image.height;
+      const maxWidth = size * MAX_WIDTH_RATIO;
 
-      if (image.width > MAX_WIDTH) {
-        const scaleFactor = MAX_WIDTH / image.width;
-        setDimensions({ height: image.height * scaleFactor, width: MAX_WIDTH });
+      if (image.width > maxWidth) {
+        const scaleFactor = maxWidth / image.width;
+        setDimensions({ height: image.height * scaleFactor, width: maxWidth });
       } else {
-        setDimensions({ height: MAX_HEIGHT, width: MAX_HEIGHT * aspectRatio });
+        setDimensions({ height: size, width: size * aspectRatio });
       }
     };
-  }, [url]);
+  }, [url, size]);
 
   useEffect(() => {
     const animH = animRefH.current;
