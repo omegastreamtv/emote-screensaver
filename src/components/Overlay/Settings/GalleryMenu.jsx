@@ -6,8 +6,8 @@ const GalleryMenu = ({ update }) => {
     update({ type: 'toggleEmoteGroup', service, scope, state });
 
   return (
-    <div id="gallery-menu" className="py-2 sticky-top">
-      <ButtonGroup className="me-2">
+    <div id="gallery-menu" className="d-flex flex-wrap pb-2 sticky-top">
+      <ButtonGroup className="mt-2 me-2">
         <Button
           variant="primary"
           size="sm"
@@ -34,7 +34,7 @@ const GalleryMenu = ({ update }) => {
       <DropdownButton
         title="Zero-Width"
         size="sm"
-        className="d-inline-block me-2"
+        className="d-inline-block mt-2 me-2"
       >
         <Dropdown.Item
           onClick={() => update({ type: 'toggleZeroWidth', state: true })}
