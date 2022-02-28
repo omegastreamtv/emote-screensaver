@@ -4,7 +4,11 @@ const EmoteGroupDropdown = ({ title, toggle, channelOnly }) => {
   const service = title.toLowerCase();
 
   return (
-    <DropdownButton title={title} size="sm" className="d-inline-block me-2">
+    <DropdownButton
+      title={title}
+      size="sm"
+      className="d-inline-block mt-2 me-2"
+    >
       <Dropdown.Item onClick={() => toggle(service, 'channel', true)}>
         Select all (channel)
       </Dropdown.Item>
