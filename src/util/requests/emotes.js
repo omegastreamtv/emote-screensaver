@@ -23,7 +23,7 @@ const urls = {
       'https://api.betterttv.net/3/cached/frankerfacez/emotes/global',
     cdn: (emoteId) => `https://cdn.frankerfacez.com/emoticon/${emoteId}/2`,
   },
-  stv: {
+  '7tv': {
     channel: (channelName) =>
       `https://api.7tv.app/v2/users/${channelName}/emotes`,
     global: () => 'https://api.7tv.app/v2/emotes/global',
@@ -38,8 +38,8 @@ export default async function getEmotes(channelName, channelId) {
     getEmotesFromService('bttv', 'global', 'code'),
     getEmotesFromService('ffz', 'channel', 'code', channelId),
     getEmotesFromService('ffz', 'global', 'code'),
-    getEmotesFromService('stv', 'channel', 'name', channelName),
-    getEmotesFromService('stv', 'global', 'name'),
+    getEmotesFromService('7tv', 'channel', 'name', channelName),
+    getEmotesFromService('7tv', 'global', 'name'),
   ]).then((resAll) =>
     resAll
       .filter((res) => res.status === 'fulfilled')
@@ -59,7 +59,7 @@ function mapEmoteData(data, service, type, nameProp) {
     data.map((emote) => ({
       name: emote[nameProp],
       url: getCdnUrl(emote, service),
-      service: service === 'stv' ? '7tv' : service,
+      service,
       scope: type,
       zeroWidth: isZeroWidth(emote, emote[nameProp]),
       selected: true,
