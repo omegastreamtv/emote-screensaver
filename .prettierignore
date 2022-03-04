@@ -1,2 +1,4 @@
-public
-build
+public/
+build/
+src/images/
+src/styles/
