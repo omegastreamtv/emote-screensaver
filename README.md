@@ -2,7 +2,7 @@
 
 Generate a DVD-style bouncing emote overlay for your Twitch stream with a single click.
 
-Built in a way that allows streamers to ***change emotes and other settings directly in OBS*** without needing to mess with strange URL parameters or visit the original website manually.
+Built in a way that allows streamers to **_change emotes and other settings directly in OBS_** without needing to mess with strange URL parameters or visit the original website manually.
 
 ### Instructions
 
