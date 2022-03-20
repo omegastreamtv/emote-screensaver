@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form, Button, InputGroup } from 'react-bootstrap';
-import getTwitchId from '../../util/requests/twitchId';
+import getChannelId from '../../util/requests/channelId';
 
 const Entry = () => {
   const [channel, setChannel] = useState('');
@@ -15,9 +15,20 @@ const Entry = () => {
 
   const validateChannel = (e) => {
     e.preventDefault();
-    getTwitchId(channel)
-      .then(() => navigate(`/channel/${channel}`))
-      .catch(() => setValidateText("That Twitch channel doesn't exist"));
+
+    (async () => {
+      try {
+        const channelId = await getChannelId(channel);
+
+        if (channelId) {
+          navigate(`/channel/${channel}`);
+        } else {
+          setValidateText("That Twitch channel doesn't exist.");
+        }
+      } catch (err) {
+        setValidateText('There was an internal error. Try again in a minute.');
+      }
+    })();
   };
 
   return (

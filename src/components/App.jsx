@@ -16,6 +16,12 @@ const App = () => (
           path="/channel-not-found"
           element={<GoHome text="That channel doesn't exist." />}
         />
+        <Route
+          path="/error"
+          element={
+            <GoHome text="Unable to load emotes. Try again in a minute." />
+          }
+        />
         <Route path="*" element={<GoHome text="Nothing to see here." />} />
       </Route>
       <Route path="/channel/:channelName" element={<Loader />} />
