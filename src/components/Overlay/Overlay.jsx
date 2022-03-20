@@ -17,6 +17,10 @@ const Overlay = ({ settings: initialSettings }) => {
   const overlayRef = useRef();
   const titleRef = useRef();
 
+  const paramsProvided =
+    new URLSearchParams(window.location.search).toString().length > 0;
+  const helpVisible = !paramsProvided && settings.showHelp;
+
   useEffect(() => {
     changeEmote();
   }, [changeEmote]);
@@ -43,7 +47,7 @@ const Overlay = ({ settings: initialSettings }) => {
       >
         {emote ? emote.name : initialSettings.emotes[0].name}
       </h1>
-      {settings.showHelp && <Instructions update={updateSettings} />}
+      {helpVisible && <Instructions update={updateSettings} />}
       <Emote
         url={emote ? emote.url : initialSettings.emotes[0].url}
         speed={settings.emoteSpeed}

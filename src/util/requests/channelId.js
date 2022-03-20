@@ -5,7 +5,7 @@ const getTwitchId = async (channelName) => {
     `https://api.retpaladinbot.com/twitch/id?user=${channelName}`
   );
 
-  return channelIdRequest?.data.data.id;
+  return channelIdRequest?.data.data?.id;
 };
 
 export default getTwitchId;
