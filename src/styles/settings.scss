@@ -1,3 +1,13 @@
+#home .option-list > * {
+  width: 50%;
+  margin-bottom: 10px;
+  overflow: hidden;
+
+  &.collapsed {
+    height: 0px;
+  }
+}
+
 .general-setting {
   width: 100%;
 

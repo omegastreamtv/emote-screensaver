@@ -1,4 +1,4 @@
-const settingsReducer = (state, action) => {
+const overlaySettingsReducer = (state, action) => {
   switch (action.type) {
     case 'setAll':
       return { ...action.value };
@@ -49,4 +49,4 @@ const settingsReducer = (state, action) => {
   }
 };
 
-export default settingsReducer;
+export default overlaySettingsReducer;
