@@ -1,6 +1,6 @@
 import { useReducer, useState, useRef, useEffect } from 'react';
 import useEmote from '../../util/hooks/useEmote';
-import settingsReducer from '../../util/hooks/useSettings';
+import settingsReducer from '../../util/hooks/useOverlaySettings';
 
 import Emote from './Emote';
 import Instructions from './Instructions';

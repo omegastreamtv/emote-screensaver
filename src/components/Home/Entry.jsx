@@ -2,10 +2,13 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form, Button, InputGroup } from 'react-bootstrap';
 import getChannelId from '../../util/requests/channelId';
+import { getParamString } from '../../util/hooks/useHomeSettings';
+import Settings from './Settings';
 
 const Entry = () => {
   const [channel, setChannel] = useState('');
   const [validateText, setValidateText] = useState(null);
+  const [selectionVisible, showSelection] = useState(false);
   const navigate = useNavigate();
 
   const onChange = (e) => {
@@ -21,7 +24,9 @@ const Entry = () => {
         const channelId = await getChannelId(channel);
 
         if (channelId) {
-          navigate(`/channel/${channel}`);
+          navigate(
+            `/channel/${channel}${selectionVisible ? getParamString() : ''}`
+          );
         } else {
           setValidateText("That Twitch channel doesn't exist.");
         }
@@ -38,8 +43,8 @@ const Entry = () => {
         a single click.
       </h4>
       <div className="mb-5">
-        <Form onSubmit={validateChannel} className="mb-2">
-          <InputGroup>
+        <Form onSubmit={validateChannel}>
+          <InputGroup className="mb-2">
             <Form.Control
               value={channel}
               placeholder="Twitch channel name"
@@ -48,8 +53,9 @@ const Entry = () => {
             />
             <Button type="submit">Start bouncing</Button>
           </InputGroup>
+          {validateText && <p className="text-danger">{validateText}</p>}
+          <Settings visible={selectionVisible} show={showSelection} />
         </Form>
-        {validateText && <p className="text-danger">{validateText}</p>}
       </div>
       <div className="footer body-text text-black-50 text-center">
         <a
