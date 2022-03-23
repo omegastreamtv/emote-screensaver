@@ -1,3 +1,5 @@
+import emoteGroups from '../emoteGroups';
+
 const homeSettingsReducer = (state, group) => {
   const newState = {
     ...state,
@@ -8,7 +10,7 @@ const homeSettingsReducer = (state, group) => {
   return newState;
 };
 
-export const loadSettings = () => JSON.parse(localStorage.getItem('groups'));
+const loadSettings = () => JSON.parse(localStorage.getItem('groups'));
 
 export const getParamString = () => {
   const settings = loadSettings();
@@ -22,5 +24,15 @@ export const getParamString = () => {
     return str;
   }, '');
 };
+
+const initialSettings = emoteGroups.reduce(
+  (obj, val) => ({
+    ...obj,
+    [val.paramKey]: val.home.default,
+  }),
+  {}
+);
+
+export const defaultSettings = loadSettings() || initialSettings;
 
 export default homeSettingsReducer;

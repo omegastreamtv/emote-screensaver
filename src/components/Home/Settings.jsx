@@ -2,22 +2,23 @@ import { useReducer } from 'react';
 import { Form } from 'react-bootstrap';
 
 import settingsReducer, {
-  loadSettings,
+  defaultSettings,
 } from '../../util/hooks/useHomeSettings';
 import emoteGroups from '../../util/emoteGroups';
 
-const defaults =
-  loadSettings() ||
-  emoteGroups.reduce(
-    (obj, val) => ({
-      ...obj,
-      [val.paramKey]: val.home.default,
-    }),
-    {}
-  );
-
 const Settings = ({ visible, show }) => {
-  const [settings, update] = useReducer(settingsReducer, defaults);
+  const [settings, update] = useReducer(settingsReducer, defaultSettings);
+
+  const toggleSettings = () => {
+    show((x) => !x);
+
+    // Reverse condition, state hasn't switched yet
+    if (!visible) {
+      localStorage.setItem('groups', JSON.stringify(defaultSettings));
+    } else {
+      localStorage.removeItem('groups');
+    }
+  };
 
   return (
     <>
@@ -25,7 +26,7 @@ const Settings = ({ visible, show }) => {
         type="switch"
         label="Preselect emotes by group"
         checked={visible}
-        onChange={() => show((x) => !x)}
+        onChange={toggleSettings}
         className="mb-2"
       />
       {visible && (
