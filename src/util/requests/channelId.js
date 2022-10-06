@@ -2,10 +2,10 @@ import axios from 'axios';
 
 const getTwitchId = async (channelName) => {
   const channelIdRequest = await axios(
-    `https://api.retpaladinbot.com/twitch/id?user=${channelName}`
+    `https://api.ivr.fi/v2/twitch/user?login=${channelName}`
   );
 
-  return channelIdRequest?.data.data?.id;
+  return channelIdRequest?.data[0]?.id;
 };
 
 export default getTwitchId;
