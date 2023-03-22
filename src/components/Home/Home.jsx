@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
-import logo from '../../images/logo.png';
+import logo from '../../images/home_logo.png';
 
 const Home = () => (
   <main
