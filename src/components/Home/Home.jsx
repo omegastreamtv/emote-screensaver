@@ -1,7 +1,5 @@
 import { Outlet } from 'react-router-dom';
 
-import logo from '../../images/home_logo.png';
-
 const Home = () => (
   <main
     id="home"
@@ -9,7 +7,7 @@ const Home = () => (
   >
     <div id="content">
       <div className="mb-5">
-        <img src={logo} alt="YEAHBUTDVDS" />
+        <img src="https://i.imgur.com/Nu9SaDH.png" alt="YEAHBUTDVDS" />
       </div>
       <Outlet />
     </div>
