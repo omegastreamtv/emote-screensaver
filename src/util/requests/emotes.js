@@ -27,7 +27,7 @@ const urls = {
     channel: (channelName) =>
       `https://api.7tv.app/v2/users/${channelName}/emotes`,
     global: () => 'https://api.7tv.app/v2/emotes/global',
-    cdn: (emoteId) => `https://cdn.7tv.app/emote/${emoteId}/3x`,
+    cdn: (emoteId) => `https://cdn.7tv.app/emote/${emoteId}/3x.webp`,
   },
 };
 
