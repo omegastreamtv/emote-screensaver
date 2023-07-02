@@ -38,11 +38,7 @@ const Loader = () => {
     })();
   }, [params.channelName, navigate]);
 
-  return settings ? (
-    <Overlay settings={settings} />
-  ) : (
-    <Loading status={status} />
-  );
+  return settings ? <Overlay settings={settings} /> : <Loading status={status} />;
 };
 
 export default Loader;

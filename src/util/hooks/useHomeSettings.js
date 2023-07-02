@@ -30,7 +30,7 @@ const initialSettings = emoteGroups.reduce(
     ...obj,
     [val.paramKey]: val.home.default,
   }),
-  {}
+  {},
 );
 
 export const defaultSettings = loadSettings() || initialSettings;

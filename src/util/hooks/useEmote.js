@@ -5,8 +5,7 @@ const useEmote = (emotes) => {
 
   const changeEmote = useCallback(() => {
     const selectedEmotes = emotes.filter((emote) => emote.selected);
-    const randomEmote =
-      selectedEmotes[Math.floor(Math.random() * selectedEmotes.length)];
+    const randomEmote = selectedEmotes[Math.floor(Math.random() * selectedEmotes.length)];
     setCurrentEmote(randomEmote);
   }, [emotes]);
 
