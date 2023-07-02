@@ -5,8 +5,8 @@ const bttvZeroWidth = ['SoSnowy', 'IceCold', 'cvHazmat', 'cvMask'];
 
 const urls = {
   twitch: {
-    channel: (channelName) =>
-      `https://api.retpaladinbot.com/twitch/emotes?id=${channelName}`,
+    channel: (channelId) =>
+      `https://api.ivr.fi/v2/twitch/emotes/channel/${channelId}?id=true`,
     cdn: (emoteId) =>
       `https://static-cdn.jtvnw.net/emoticons/v2/${emoteId}/static/light/3.0`,
   },
@@ -27,13 +27,13 @@ const urls = {
     channel: (channelName) =>
       `https://api.7tv.app/v2/users/${channelName}/emotes`,
     global: () => 'https://api.7tv.app/v2/emotes/global',
-    cdn: (emoteId) => `https://cdn.7tv.app/emote/${emoteId}/3x`,
+    cdn: (emoteId) => `https://cdn.7tv.app/emote/${emoteId}/3x.webp`,
   },
 };
 
 export default async function getEmotes(channelName, channelId) {
   return Promise.allSettled([
-    getTwitchEmotes('twitch', 'channel', 'name', channelName),
+    getTwitchEmotes('twitch', 'channel', 'code', channelId),
     getBttvChannelEmotes(channelId),
     getEmotesFromService('bttv', 'global', 'code'),
     getEmotesFromService('ffz', 'channel', 'code', channelId),
@@ -55,6 +55,15 @@ function getEmotesFromService(service, type, nameProp, param) {
 }
 
 function mapEmoteData(data, service, type, nameProp) {
+  if (service === 'twitch' && type === 'channel' && nameProp === 'code') {
+    const channelEmotes = [];
+    data.subProducts.forEach((emoteTier) => {
+      channelEmotes.push(...emoteTier.emotes);
+    });
+
+    data = channelEmotes;
+  }
+
   return (
     data.map((emote) => ({
       name: emote[nameProp],
@@ -70,7 +79,7 @@ function mapEmoteData(data, service, type, nameProp) {
 function getTwitchEmotes(service, type, nameProp, param) {
   return axios
     .get(urls[service][type](param))
-    .then((res) => mapEmoteData(res?.data.data, service, type, nameProp));
+    .then((res) => mapEmoteData(res?.data, service, type, nameProp));
 }
 
 function getBttvChannelEmotes(channelId) {
@@ -93,7 +102,7 @@ function getBttvChannelEmotes(channelId) {
 }
 
 function getCdnUrl(emote, service) {
-  return service === 'twitch' && emote.format?.includes('animated')
+  return service === 'twitch' && emote.assetType === 'ANIMATED'
     ? urls[service].cdn(emote.id).replace(/\/static\//, '/animated/')
     : urls[service].cdn(emote.id);
 }
