@@ -21,15 +21,13 @@
     "@types/react-dom": "18.2.5",
     "@typescript-eslint/eslint-plugin": "^5.59.11",
     "@typescript-eslint/parser": "^5.59.11",
-    "autoprefixer": "10.4.14",
     "classnames": "^2.3.2",
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.6",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "postcss": "8.4.24",
     "prettier": "^2.8.8",
-    "tailwindcss": "3.3.2",
+    "sass": "^1.63.6",
     "typescript": "5.1.3"
   }
 }
