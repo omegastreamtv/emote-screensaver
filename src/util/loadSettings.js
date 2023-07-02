@@ -25,8 +25,7 @@ function loadSettings(requestedEmotes, channel) {
     const updatedEmotes = requestedEmotes.map((emote) => ({
       ...emote,
       selected:
-        emoteParamVal(params, emote) ??
-        savedEmoteSelected(currentSettings, emote),
+        emoteParamVal(params, emote) ?? savedEmoteSelected(currentSettings, emote),
     }));
 
     newSettings = Object.assign({}, defaults, currentSettings, {
@@ -39,9 +38,8 @@ function loadSettings(requestedEmotes, channel) {
 }
 
 function savedEmoteSelected(currentSettings, emote) {
-  return !!currentSettings.emotes.find(
-    (savedEmote) => savedEmote.name === emote.name
-  )?.selected;
+  return !!currentSettings.emotes.find((savedEmote) => savedEmote.name === emote.name)
+    ?.selected;
 }
 
 function emoteParamVal(params, emote) {

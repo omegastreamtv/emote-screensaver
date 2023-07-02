@@ -18,9 +18,7 @@ const App = () => (
         />
         <Route
           path="/error"
-          element={
-            <GoHome text="Unable to load emotes. Try again in a minute." />
-          }
+          element={<GoHome text="Unable to load emotes. Try again in a minute." />}
         />
         <Route path="*" element={<GoHome text="Nothing to see here." />} />
       </Route>

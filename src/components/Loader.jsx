@@ -28,7 +28,7 @@ const Loader = () => {
         }
 
         setStatusText('Collecting emotes');
-        const newEmotes = await getEmotes(params.channelName, channelId);
+        const newEmotes = await getEmotes(channelId);
 
         setStatusText('Loading preferences');
         setSettings(loadSettings(newEmotes, params.channelName));
@@ -38,11 +38,7 @@ const Loader = () => {
     })();
   }, [params.channelName, navigate]);
 
-  return settings ? (
-    <Overlay settings={settings} />
-  ) : (
-    <Loading status={status} />
-  );
+  return settings ? <Overlay settings={settings} /> : <Loading status={status} />;
 };
 
 export default Loader;

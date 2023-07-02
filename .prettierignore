@@ -1,4 +1,6 @@
-public/
 build/
-src/images/
-src/styles/
+public/
+
+*.css
+*.d.ts
+*.scss

@@ -23,27 +23,15 @@ const GalleryMenu = ({ update }) => {
           Deselect All
         </Button>
       </ButtonGroup>
-      <EmoteGroupDropdown
-        title="Twitch"
-        toggle={toggleEmoteGroup}
-        channelOnly
-      />
+      <EmoteGroupDropdown title="Twitch" toggle={toggleEmoteGroup} channelOnly />
       <EmoteGroupDropdown title="7TV" toggle={toggleEmoteGroup} />
       <EmoteGroupDropdown title="BTTV" toggle={toggleEmoteGroup} />
       <EmoteGroupDropdown title="FFZ" toggle={toggleEmoteGroup} />
-      <DropdownButton
-        title="Zero-Width"
-        size="sm"
-        className="d-inline-block mt-2 me-2"
-      >
-        <Dropdown.Item
-          onClick={() => update({ type: 'toggleZeroWidth', state: true })}
-        >
+      <DropdownButton title="Zero-Width" size="sm" className="d-inline-block mt-2 me-2">
+        <Dropdown.Item onClick={() => update({ type: 'toggleZeroWidth', state: true })}>
           Select all
         </Dropdown.Item>
-        <Dropdown.Item
-          onClick={() => update({ type: 'toggleZeroWidth', state: false })}
-        >
+        <Dropdown.Item onClick={() => update({ type: 'toggleZeroWidth', state: false })}>
           Deselect all
         </Dropdown.Item>
       </DropdownButton>
