@@ -11,8 +11,7 @@ type Props = {
   show: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const Settings = ({ active, show }: Props) => {
-  // const [settings, update] = useReducer(homeSettingsReducer, baseSettings);
+function Settings({ active, show }: Props) {
   const [settings, update] = useState(baseSettings);
 
   useEffect(() => {
@@ -53,6 +52,6 @@ const Settings = ({ active, show }: Props) => {
       )}
     </Form.Group>
   );
-};
+}
 
 export default Settings;
