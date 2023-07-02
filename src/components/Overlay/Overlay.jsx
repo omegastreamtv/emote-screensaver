@@ -7,10 +7,7 @@ import Instructions from './Instructions';
 import Settings from './Settings/Settings';
 
 const Overlay = ({ settings: initialSettings }) => {
-  const [settings, updateSettings] = useReducer(
-    settingsReducer,
-    initialSettings
-  );
+  const [settings, updateSettings] = useReducer(settingsReducer, initialSettings);
   const [emote, changeEmote] = useEmote(settings.emotes);
   const [settingsVisible, showSettings] = useState(false);
 

@@ -1,9 +1,7 @@
 import { useReducer } from 'react';
 import { Form } from 'react-bootstrap';
 
-import settingsReducer, {
-  defaultSettings,
-} from '../../util/hooks/useHomeSettings';
+import settingsReducer, { defaultSettings } from '../../util/hooks/useHomeSettings';
 import emoteGroups from '../../util/emoteGroups';
 
 const Settings = ({ visible, show }) => {

@@ -42,9 +42,7 @@ const GeneralSettings = ({ data, update }) => {
       <Setting label="Text size">
         <Form.Range
           value={data.textSize}
-          onChange={(e) =>
-            update({ type: 'setTextSize', value: e.target.value })
-          }
+          onChange={(e) => update({ type: 'setTextSize', value: e.target.value })}
         />
       </Setting>
       <Setting>
@@ -52,9 +50,7 @@ const GeneralSettings = ({ data, update }) => {
           type="switch"
           label="Enable newly added emotes by default"
           checked={data.emoteDefault}
-          onChange={(e) =>
-            update({ type: 'setEmoteDefault', value: e.target.checked })
-          }
+          onChange={(e) => update({ type: 'setEmoteDefault', value: e.target.checked })}
         />
       </Setting>
     </div>

@@ -24,9 +24,7 @@ const Entry = () => {
         const channelId = await getChannelId(channel);
 
         if (channelId) {
-          navigate(
-            `/channel/${channel}${selectionVisible ? getParamString() : ''}`
-          );
+          navigate(`/channel/${channel}${selectionVisible ? getParamString() : ''}`);
         } else {
           setValidateText("That Twitch channel doesn't exist.");
         }
@@ -39,8 +37,8 @@ const Entry = () => {
   return (
     <>
       <h4 className="mb-5 text-center">
-        Generate a DVD-style bouncing emote overlay for your Twitch stream with
-        a single click.
+        Generate a DVD-style bouncing emote overlay for your Twitch stream with a single
+        click.
       </h4>
       <div className="mb-5">
         <Form onSubmit={validateChannel}>
@@ -58,11 +56,7 @@ const Entry = () => {
         </Form>
       </div>
       <div className="footer body-text text-black-50 text-center">
-        <a
-          href="https://github.com/Mahcks/YEAHBUTDVDs"
-          target="_blank"
-          rel="noreferrer"
-        >
+        <a href="https://github.com/Mahcks/YEAHBUTDVDs" target="_blank" rel="noreferrer">
           <img
             src="https://cdn.onlinewebfonts.com/svg/img_44605.png"
             alt="GitHub"
@@ -79,11 +73,7 @@ const Entry = () => {
             title="esfandL"
           />
           <span> by </span>
-          <a
-            href="https://twitch.tv/chudbungus"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a href="https://twitch.tv/chudbungus" target="_blank" rel="noreferrer">
             Chud Bungus
           </a>
           <span> and </span>
