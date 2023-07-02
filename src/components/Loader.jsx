@@ -28,7 +28,7 @@ const Loader = () => {
         }
 
         setStatusText('Collecting emotes');
-        const newEmotes = await getEmotes(params.channelName, channelId);
+        const newEmotes = await getEmotes(channelId);
 
         setStatusText('Loading preferences');
         setSettings(loadSettings(newEmotes, params.channelName));
