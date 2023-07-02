@@ -1,0 +1,69 @@
+'use client';
+
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Button, Form, InputGroup } from 'react-bootstrap';
+import HomeSettings from './HomeSettings';
+import { getTwitchId } from '@/util/channel';
+import { getParamString } from '@/util/settings/home';
+
+function HomeForm() {
+  const [channelName, setChannelName] = useState('');
+  const [validating, setValidating] = useState(false);
+  const [validationText, setValidationText] = useState<string | null>(null);
+  const [settingsActive, showSettings] = useState(false);
+
+  const router = useRouter();
+
+  const onChannelTyped: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    validationText && setValidationText(null);
+    setChannelName(e.currentTarget.value);
+  };
+
+  const validateChannel = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    setValidating(true);
+
+    getTwitchId(channelName)
+      .then((channelId) => {
+        if (channelId) {
+          router.push(
+            `/channel/${channelName}${settingsActive ? getParamString() : ''}`
+          );
+        } else {
+          setValidating(false);
+          setValidationText("That Twitch channel doesn't exist.");
+        }
+      })
+      .catch((err) => {
+        setValidating(false);
+        // setValidationText(
+        //   'Unable to lookup Twitch channel. Try again in a minute.'
+        // );
+        setValidationText(JSON.stringify(err));
+      });
+  };
+
+  return (
+    <Form onSubmit={validateChannel} className="mb-5">
+      <InputGroup hasValidation className="mb-2">
+        <Form.Control
+          value={channelName}
+          placeholder="Twitch channel name"
+          onChange={onChannelTyped}
+          disabled={validating}
+          autoFocus
+          required
+        />
+        <Button type="submit" disabled={validating}>
+          Start bouncing
+        </Button>
+      </InputGroup>
+      {validationText && <p className="text-danger">{validationText}</p>}
+      <HomeSettings active={settingsActive} show={showSettings} />
+    </Form>
+  );
+}
+
+export default HomeForm;

@@ -1,22 +1,20 @@
-const groups = [
+import { Service, Scope, GroupKey } from './types';
+
+export type EmoteGroup = {
+  service?: Service;
+  scope?: Scope;
+  paramKey: GroupKey;
+  home: {
+    text: string;
+    default: boolean;
+  };
+};
+
+export default <EmoteGroup[]>[
   {
     paramKey: 'zw',
     home: {
       text: 'Zero-width emotes',
-      default: false,
-    },
-  },
-  {
-    paramKey: 'channel',
-    home: {
-      text: 'All channel emotes',
-      default: true,
-    },
-  },
-  {
-    paramKey: 'global',
-    home: {
-      text: 'All global emotes',
       default: false,
     },
   },
@@ -84,5 +82,3 @@ const groups = [
     },
   },
 ];
-
-export default groups;
