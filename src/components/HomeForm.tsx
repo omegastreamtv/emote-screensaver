@@ -38,10 +38,9 @@ function HomeForm() {
       })
       .catch((err) => {
         setValidating(false);
-        // setValidationText(
-        //   'Unable to lookup Twitch channel. Try again in a minute.'
-        // );
-        setValidationText(JSON.stringify(err));
+        setValidationText(
+          'Unable to lookup Twitch channel. Try again in a minute.'
+        );
       });
   };
 
