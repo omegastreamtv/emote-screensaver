@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button, Form, InputGroup } from 'react-bootstrap';
-import HomeSettings from './HomeSettings';
+import HomeSettings from './Settings';
 import { getTwitchId } from '@/util/channel';
 import { getParamString } from '@/util/settings/home';
 
@@ -36,7 +36,7 @@ function HomeForm() {
           setValidationText("That Twitch channel doesn't exist.");
         }
       })
-      .catch((err) => {
+      .catch(() => {
         setValidating(false);
         setValidationText(
           'Unable to lookup Twitch channel. Try again in a minute.'

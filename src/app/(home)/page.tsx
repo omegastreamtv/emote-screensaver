@@ -1,4 +1,4 @@
-import HomeForm from '@/components/HomeForm';
+import HomeForm from '@/components/home/Form';
 import Link from 'next/link';
 
 function Index() {
