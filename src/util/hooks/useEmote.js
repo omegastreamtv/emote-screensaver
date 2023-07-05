@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 
-const useEmote = (emotes) => {
+function useEmote(emotes) {
   const [currentEmote, setCurrentEmote] = useState(null);
 
   const changeEmote = useCallback(() => {
@@ -10,6 +10,6 @@ const useEmote = (emotes) => {
   }, [emotes]);
 
   return [currentEmote, changeEmote];
-};
+}
 
 export default useEmote;

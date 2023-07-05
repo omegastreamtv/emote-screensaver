@@ -1,4 +1,37 @@
-const overlaySettingsReducer = (state, action) => {
+import { OverlaySettings, Service, Scope } from '@/util/types';
+
+type SetAllAction = {
+  type: 'setAll';
+  value: OverlaySettings;
+};
+
+type SetNumericAction = {
+  type: 'setTextSize' | 'setEmoteSize' | 'setEmoteSpeed' | 'toggleEmote';
+  value: number;
+};
+
+type SetBooleanAction = {
+  type: 'setEmoteDefault' | 'showHelp' | 'toggleAllEmotes' | 'toggleZeroWidth';
+  value: boolean;
+};
+
+type SetGroupAction = {
+  type: 'toggleEmoteGroup';
+  value: boolean;
+  service: Service;
+  scope: Scope;
+};
+
+type Action =
+  | SetAllAction
+  | SetNumericAction
+  | SetBooleanAction
+  | SetGroupAction;
+
+function overlaySettingsReducer(
+  state: OverlaySettings,
+  action: Action
+): OverlaySettings {
   switch (action.type) {
     case 'setAll':
       return { ...action.value };
@@ -10,10 +43,10 @@ const overlaySettingsReducer = (state, action) => {
       return { ...state, emoteSpeed: action.value };
     case 'setEmoteDefault':
       return { ...state, emoteDefault: action.value };
-    case 'toggleHelp':
+    case 'showHelp':
       return { ...state, showHelp: action.value };
     case 'toggleEmote':
-      let emotes = [...state.emotes];
+      const emotes = [...state.emotes];
       emotes[action.value].selected = !emotes[action.value].selected;
 
       return { ...state, emotes };
@@ -22,7 +55,7 @@ const overlaySettingsReducer = (state, action) => {
         ...state,
         emotes: state.emotes.map((emote) => ({
           ...emote,
-          selected: action.state,
+          selected: action.value,
         })),
       };
     case 'toggleEmoteGroup':
@@ -32,7 +65,7 @@ const overlaySettingsReducer = (state, action) => {
           ...emote,
           selected:
             emote.service === action.service && emote.scope === action.scope
-              ? action.state
+              ? action.value
               : emote.selected,
         })),
       };
@@ -41,12 +74,12 @@ const overlaySettingsReducer = (state, action) => {
         ...state,
         emotes: state.emotes.map((emote) => ({
           ...emote,
-          selected: emote.zeroWidth ? action.state : emote.selected,
+          selected: emote.zeroWidth ? action.value : emote.selected,
         })),
       };
     default:
       return state;
   }
-};
+}
 
 export default overlaySettingsReducer;
