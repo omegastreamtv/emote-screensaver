@@ -1,3 +1,5 @@
+'use client';
+
 function Loading() {
   return (
     <div className="d-flex flex-column justify-content-center align-items-center vw-100 vh-100 m-auto">
