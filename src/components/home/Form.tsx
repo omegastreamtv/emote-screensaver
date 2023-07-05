@@ -20,28 +20,28 @@ function HomeForm() {
     setChannelName(e.currentTarget.value);
   };
 
-  const validateChannel = (e: React.FormEvent) => {
+  const validateChannel = async (e: React.FormEvent) => {
     e.preventDefault();
 
     setValidating(true);
 
-    getTwitchId(channelName)
-      .then((channelId) => {
-        if (channelId) {
-          router.push(
-            `/channel/${channelName}${settingsActive ? getParamString() : ''}`
-          );
-        } else {
-          setValidating(false);
-          setValidationText("That Twitch channel doesn't exist.");
-        }
-      })
-      .catch(() => {
-        setValidating(false);
-        setValidationText(
-          'Unable to lookup Twitch channel. Try again in a minute.'
+    try {
+      const channelId = await getTwitchId(channelName);
+
+      if (channelId) {
+        router.push(
+          `/channel/${channelName}${settingsActive ? getParamString() : ''}`
         );
-      });
+      } else {
+        setValidating(false);
+        setValidationText("That Twitch channel doesn't exist.");
+      }
+    } catch {
+      setValidating(false);
+      setValidationText(
+        'Unable to lookup Twitch channel. Try again in a minute.'
+      );
+    }
   };
 
   return (
