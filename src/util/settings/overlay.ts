@@ -9,17 +9,26 @@ const defaults = <Settings>{
   emotes: [],
 };
 
-function loadSettings(emotes: Emote[], channelName: string) {
-  const storageKey = `settings-${channelName}`;
+export function getStorageKey(channelName: string) {
+  return `settings-${channelName}`;
+}
 
-  const params = getParams();
-
+export function getStoredSettings(channelName: string): Settings | undefined {
+  const storageKey = getStorageKey(channelName);
   const _storedSettings = localStorage.getItem(storageKey);
-  const storedSettings: Settings = JSON.parse(_storedSettings || '{}');
+
+  if (_storedSettings) {
+    return JSON.parse(_storedSettings);
+  }
+}
+
+function loadSettings(emotes: Emote[], channelName: string) {
+  const params = getParams();
+  const storedSettings = getStoredSettings(channelName);
 
   let settings: Settings = Object.assign({}, defaults);
 
-  if (!_storedSettings) {
+  if (!storedSettings) {
     settings = Object.assign(settings, {
       emotes: emotes.map((emote) => {
         emote.selected = emoteSelectedInParams(params, emote);
@@ -39,6 +48,7 @@ function loadSettings(emotes: Emote[], channelName: string) {
     } as Settings);
   }
 
+  const storageKey = getStorageKey(channelName);
   localStorage.setItem(storageKey, JSON.stringify(settings));
 
   return settings;

@@ -1,6 +1,7 @@
 import { Dispatch } from 'react';
 import { Button } from 'react-bootstrap';
 import { SettingsAction } from '@/util/hooks/useOverlaySettings';
+import { getStorageKey, getStoredSettings } from '@/util/settings/overlay';
 
 type Props = {
   channelName: string;
@@ -9,10 +10,8 @@ type Props = {
 
 const Instructions = ({ channelName, update }: Props) => {
   const hide = () => {
-    const storageKey = `settings-${channelName}`;
-
-    const _settings = localStorage.getItem(storageKey);
-    const settings = JSON.parse(_settings || '{}');
+    const settings = getStoredSettings(channelName);
+    const storageKey = getStorageKey(channelName);
 
     localStorage.setItem(storageKey, JSON.stringify({ ...settings, showHelp: false }));
 
