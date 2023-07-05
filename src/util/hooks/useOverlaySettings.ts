@@ -22,16 +22,16 @@ type SetGroupAction = {
   scope: Scope;
 };
 
-type Action =
+export type SettingsAction =
   | SetAllAction
   | SetNumericAction
   | SetBooleanAction
   | SetGroupAction;
 
-function overlaySettingsReducer(
+export const settingsReducer: React.Reducer<OverlaySettings, SettingsAction> = (
   state: OverlaySettings,
-  action: Action
-): OverlaySettings {
+  action: SettingsAction
+) => {
   switch (action.type) {
     case 'setAll':
       return { ...action.value };
@@ -80,6 +80,4 @@ function overlaySettingsReducer(
     default:
       return state;
   }
-}
-
-export default overlaySettingsReducer;
+};

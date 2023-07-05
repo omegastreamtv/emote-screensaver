@@ -1,15 +1,13 @@
 'use client';
 
 import { useReducer, useState, useEffect } from 'react';
-import useEmote from '../../util/hooks/useEmote';
-import settingsReducer from '../../util/hooks/useOverlaySettings';
-
 import Emote from './Emote';
 import Instructions from './Instructions';
 import Settings from './Settings/Settings';
-
-import { Emote as EmoteT } from '@/util/types';
 import loadSettings from '@/util/settings/overlay';
+import { useEmote } from '@/util/hooks/useEmote';
+import { settingsReducer } from '@/util/hooks/useOverlaySettings';
+import { Emote as EmoteT } from '@/util/types';
 
 type Props = {
   channelName: string;
@@ -49,7 +47,9 @@ function Overlay({ channelName, emotes }: Props) {
       >
         {emote ? emote.name : settings.emotes[0].name}
       </h1>
-      {settings.showHelp && <Instructions update={updateSettings} />}
+      {settings.showHelp && (
+        <Instructions channelName={channelName} update={updateSettings} />
+      )}
       <Emote
         url={emote ? emote.url : settings.emotes[0].url}
         speed={settings.emoteSpeed}

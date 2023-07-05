@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Emote } from '@/util/types';
 
-function useEmote(emotes: Emote[]): [Emote | null, () => void] {
+export function useEmote(emotes: Emote[]): [Emote | null, () => void] {
   const [currentEmote, setCurrentEmote] = useState<Emote | null>(null);
 
   const changeEmote = () => {
@@ -14,5 +14,3 @@ function useEmote(emotes: Emote[]): [Emote | null, () => void] {
 
   return [currentEmote, changeEmote];
 }
-
-export default useEmote;
