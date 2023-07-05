@@ -1,11 +1,22 @@
+import { Dispatch } from 'react';
 import { Button } from 'react-bootstrap';
+import { SettingsAction } from '@/util/hooks/useOverlaySettings';
 
-const Instructions = ({ update }) => {
-  const hideHelp = () => {
-    const settings = JSON.parse(localStorage.getItem('settings'));
-    localStorage.setItem('settings', JSON.stringify({ ...settings, showHelp: false }));
+type Props = {
+  channelName: string;
+  update: Dispatch<SettingsAction>;
+};
 
-    update({ type: 'toggleHelp', value: false });
+const Instructions = ({ channelName, update }: Props) => {
+  const hide = () => {
+    const storageKey = `settings-${channelName}`;
+
+    const _settings = localStorage.getItem(storageKey);
+    const settings = JSON.parse(_settings || '{}');
+
+    localStorage.setItem(storageKey, JSON.stringify({ ...settings, showHelp: false }));
+
+    update({ type: 'showHelp', value: false });
   };
 
   return (
@@ -30,7 +41,7 @@ const Instructions = ({ update }) => {
         Leave the option "Shutdown source when not visible" unchecked or the page will
         reset after switching scenes.
       </p>
-      <Button onClick={hideHelp}>Got it!</Button>
+      <Button onClick={hide}>Got it!</Button>
     </div>
   );
 };
