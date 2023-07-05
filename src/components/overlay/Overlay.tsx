@@ -1,4 +1,6 @@
-import { useReducer, useState, useRef, useEffect } from 'react';
+'use client';
+
+import { useReducer, useState, useEffect } from 'react';
 import useEmote from '../../util/hooks/useEmote';
 import settingsReducer from '../../util/hooks/useOverlaySettings';
 
@@ -6,28 +8,32 @@ import Emote from './Emote';
 import Instructions from './Instructions';
 import Settings from './Settings/Settings';
 
-const Overlay = ({ settings: initialSettings }) => {
-  const [settings, updateSettings] = useReducer(settingsReducer, initialSettings);
+import { Emote as EmoteT } from '@/util/types';
+import loadSettings from '@/util/settings/overlay';
+
+type Props = {
+  channelName: string;
+  emotes: EmoteT[];
+};
+
+function Overlay({ channelName, emotes }: Props) {
+  const [settings, updateSettings] = useReducer(
+    settingsReducer,
+    loadSettings(emotes, channelName)
+  );
   const [emote, changeEmote] = useEmote(settings.emotes);
-  const [settingsVisible, showSettings] = useState(false);
-
-  const overlayRef = useRef();
-  const titleRef = useRef();
-
-  const paramsProvided =
-    new URLSearchParams(window.location.search).toString().length > 0;
-  const helpVisible = !paramsProvided && settings.showHelp;
+  const [settingsActive, showSettings] = useState(false);
 
   useEffect(() => {
     changeEmote();
-  }, [changeEmote]);
+  }, []);
 
   return (
-    <div id="overlay" ref={overlayRef}>
+    <div id="overlay">
       <Settings
         data={settings}
         update={updateSettings}
-        visible={settingsVisible}
+        visible={settingsActive}
         show={showSettings}
       />
       <button
@@ -40,20 +46,18 @@ const Overlay = ({ settings: initialSettings }) => {
         id="emote-name"
         className="position-absolute start-50 translate-middle-x drop-shadow"
         style={{ fontSize: `${settings.textSize}pt` }}
-        ref={titleRef}
       >
-        {emote ? emote.name : initialSettings.emotes[0].name}
+        {emote ? emote.name : settings.emotes[0].name}
       </h1>
-      {helpVisible && <Instructions update={updateSettings} />}
+      {settings.showHelp && <Instructions update={updateSettings} />}
       <Emote
-        url={emote ? emote.url : initialSettings.emotes[0].url}
+        url={emote ? emote.url : settings.emotes[0].url}
         speed={settings.emoteSpeed}
         size={settings.emoteSize}
-        overlay={overlayRef}
         onBounce={changeEmote}
       />
     </div>
   );
-};
+}
 
 export default Overlay;
