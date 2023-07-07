@@ -1,8 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
-import { baseSettings, getStoredSettings } from '@/util/settings/home';
+import { useHomeSettings } from '@/util/settings/home';
 import emoteGroups from '@/util/emoteGroups';
 import { GroupKey, HomeSettings } from '@/util/types';
 
@@ -12,20 +11,13 @@ type Props = {
 };
 
 function Settings({ active, show }: Props) {
-  const [settings, update] = useState(baseSettings);
-
-  useEffect(() => {
-    const storedSettings = getStoredSettings();
-    storedSettings && update(storedSettings);
-  }, []);
+  const [settings, updateSettings] = useHomeSettings();
 
   const toggleGroup = (group: GroupKey) => {
-    update((s: HomeSettings) => {
+    updateSettings((s: HomeSettings) => {
       s[group] = !s[group];
       return s;
     });
-
-    localStorage.setItem('groups', JSON.stringify(settings));
   };
 
   return (

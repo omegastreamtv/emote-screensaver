@@ -1,7 +1,9 @@
+import { useEffect, useState } from 'react';
 import emoteGroups from '../emoteGroups';
 import { HomeSettings as Settings } from '../types';
 
-export const baseSettings = emoteGroups.reduce(
+const HOME_STORAGE_KEY = 'home';
+const DEFAULTS = emoteGroups.reduce(
   (obj, val) => ({
     ...obj,
     [val.paramKey]: val.home.default,
@@ -9,14 +11,41 @@ export const baseSettings = emoteGroups.reduce(
   {} as Settings
 );
 
-export const getStoredSettings = (): Settings | undefined => {
-  const storedSettings = localStorage.getItem('groups');
+export function useHomeSettings() {
+  const [settings, updateSettings] = useState(DEFAULTS);
 
-  if (storedSettings) return JSON.parse(storedSettings);
-};
+  useEffect(() => {
+    const storedSettings = loadSettings();
+    storedSettings && updateSettings(storedSettings);
+  }, []);
 
-export const getParamString = () => {
-  const settings = getStoredSettings();
+  useEffect(() => {
+    storeSettings(settings);
+  }, [settings]);
+
+  return [settings, updateSettings] as const;
+}
+
+function loadSettings(): Settings | undefined {
+  if (typeof window !== 'undefined') {
+    const storedSettings = localStorage.getItem(HOME_STORAGE_KEY);
+
+    if (storedSettings) {
+      return JSON.parse(storedSettings);
+    }
+  }
+}
+
+function storeSettings(settings: Settings) {
+  if (typeof window !== 'undefined') {
+    const currentSettings = loadSettings();
+    const newSettings = Object.assign({}, currentSettings, settings);
+    localStorage.setItem(HOME_STORAGE_KEY, JSON.stringify(newSettings));
+  }
+}
+
+export function getParamString() {
+  const settings = loadSettings();
 
   if (!settings) {
     return '';
@@ -29,4 +58,4 @@ export const getParamString = () => {
       .flatMap((x) => `${x[0]}=${x[1]}`)
       .join('&')
   );
-};
+}
