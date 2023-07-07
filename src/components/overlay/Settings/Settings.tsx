@@ -1,15 +1,27 @@
+import { useMemo } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-
 import GalleryMenu from './GalleryMenu';
 import Gallery from './Gallery';
 import GeneralSettings from './General/GeneralSettings';
+import { SettingsAction } from '@/util/hooks/useOverlaySettings';
+import { OverlaySettings } from '@/util/types';
 
-const Settings = ({ data, update, visible, show }) => {
-  const allowSave = data.emotes.filter((emote) => emote.selected).length > 0;
+type Props = {
+  data: OverlaySettings;
+  update: React.Dispatch<SettingsAction>;
+  visible: boolean;
+  show: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+function Settings({ data, update, visible, show }: Props) {
+  const allowSave = useMemo(
+    () => data.emotes.filter((emote) => emote.selected).length > 0,
+    [data.emotes]
+  );
 
   const showHelp = () => {
     show(false);
-    update({ type: 'toggleHelp', value: true });
+    update({ type: 'showHelp', value: true });
   };
 
   const saveAndClose = () => {
@@ -40,7 +52,9 @@ const Settings = ({ data, update, visible, show }) => {
         <GalleryMenu update={update} />
         <Gallery
           emotes={data.emotes}
-          toggleEmote={(idx) => update({ type: 'toggleEmote', value: idx })}
+          toggleEmote={(idx: number) =>
+            update({ type: 'toggleEmote', value: idx })
+          }
         />
       </Modal.Body>
       <Modal.Footer className="justify-content-between">
@@ -53,6 +67,6 @@ const Settings = ({ data, update, visible, show }) => {
       </Modal.Footer>
     </Modal>
   );
-};
+}
 
 export default Settings;
