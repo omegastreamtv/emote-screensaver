@@ -2,7 +2,7 @@
 
 import { useEffect, useReducer } from 'react';
 import { useSearchParams, type ReadonlyURLSearchParams } from 'next/navigation';
-import { settingsReducer } from '../hooks/useOverlaySettings';
+import { settingsReducer } from './settingsReducer';
 import type { Emote, GroupKey, OverlaySettings as Settings } from '../types';
 
 const DEFAULTS: Settings = {
