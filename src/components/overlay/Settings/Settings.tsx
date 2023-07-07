@@ -2,8 +2,9 @@ import { useMemo } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import GalleryMenu from './GalleryMenu';
 import Gallery from './Gallery';
-import GeneralSettings from './General/GeneralSettings';
+import GeneralSettings from './general/GeneralSettings';
 import { SettingsAction } from '@/util/hooks/useOverlaySettings';
+import { getStorageKey } from '@/util/settings/overlay';
 import { OverlaySettings } from '@/util/types';
 
 type Props = {
@@ -25,7 +26,9 @@ function Settings({ data, update, visible, show }: Props) {
   };
 
   const saveAndClose = () => {
-    localStorage.setItem('settings', JSON.stringify(data));
+    const storageKey = getStorageKey(data.channelName as string);
+    localStorage.setItem(storageKey, JSON.stringify(data));
+
     show(false);
   };
 
