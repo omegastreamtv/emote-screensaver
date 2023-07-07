@@ -6,6 +6,7 @@ export type GroupKey = Service | 'bttvg' | 'ffzg' | '7tvg' | 'zw';
 export type HomeSettings = Record<GroupKey, boolean>;
 
 export type OverlaySettings = {
+  channelName: string | null;
   textSize: number;
   emoteSize: number;
   emoteSpeed: number;

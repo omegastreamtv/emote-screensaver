@@ -1,6 +1,7 @@
 import { Emote, GroupKey, OverlaySettings as Settings } from '../types';
 
-const defaults = <Settings>{
+const defaults: Settings = {
+  channelName: null,
   textSize: 48,
   emoteSize: 100,
   emoteSpeed: 50,
@@ -26,7 +27,9 @@ function loadSettings(emotes: Emote[], channelName: string) {
   const params = getParams();
   const storedSettings = getStoredSettings(channelName);
 
-  let settings: Settings = Object.assign({}, defaults);
+  let settings: Settings = Object.assign({}, defaults, {
+    channelName,
+  } as Settings);
 
   if (!storedSettings) {
     settings = Object.assign(settings, {
