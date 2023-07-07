@@ -1,17 +1,14 @@
 'use client';
 
 import { Button } from 'react-bootstrap';
-import { SettingsAction } from '@/util/hooks/useOverlaySettings';
-import { storeSettings } from '@/util/settings/overlay';
+import { SettingsAction } from '@/util/hooks/settingsReducer';
 
 type Props = {
-  channelName: string;
   update: React.Dispatch<SettingsAction>;
 };
 
-const Instructions = ({ channelName, update }: Props) => {
+function Instructions({ update }: Props) {
   const hide = () => {
-    storeSettings(channelName, { showHelp: false });
     update({ type: 'showHelp', value: false });
   };
 
@@ -40,6 +37,6 @@ const Instructions = ({ channelName, update }: Props) => {
       <Button onClick={hide}>Got it!</Button>
     </div>
   );
-};
+}
 
 export default Instructions;

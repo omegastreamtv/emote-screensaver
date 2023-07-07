@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Emote from './Emote';
 import Instructions from './Instructions';
 import Settings from './settings/Settings';
-import { useOverlaySettings } from '@/util/settings/overlay';
+import { useOverlaySettings } from '@/util/hooks/useOverlaySettings';
 import { useEmote } from '@/util/hooks/useEmote';
 import { Emote as EmoteType } from '@/util/types';
 
@@ -43,9 +43,7 @@ function Overlay({ channelName, emotes }: Props) {
       >
         {emote?.name}
       </h1>
-      {settings.showHelp && (
-        <Instructions channelName={channelName} update={updateSettings} />
-      )}
+      {settings.showHelp && <Instructions update={updateSettings} />}
       {emote && (
         <Emote
           url={emote.url}

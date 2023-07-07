@@ -3,7 +3,7 @@ import { Modal, Button } from 'react-bootstrap';
 import GalleryMenu from './GalleryMenu';
 import Gallery from './Gallery';
 import GeneralSettings from './general/GeneralSettings';
-import { SettingsAction } from '@/util/hooks/useOverlaySettings';
+import { SettingsAction } from '@/util/hooks/settingsReducer';
 import { storeSettings } from '@/util/settings/overlay';
 import { OverlaySettings } from '@/util/types';
 
