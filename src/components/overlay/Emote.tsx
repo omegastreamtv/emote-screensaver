@@ -1,33 +1,39 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect, createRef } from 'react';
 
 const MAX_WIDTH_RATIO = 2;
 
-const getDurationX = (speed) => window.innerWidth / speed;
-const getDurationY = (speed) => window.innerHeight / speed;
+const getDurationX = (speed: number) => window.innerWidth / speed;
+const getDurationY = (speed: number) => window.innerHeight / speed;
 
 // Reset all animations. Pointlessly gets offsetWidth as a hack
 // to trigger a browser reflow to force the reset.
-const resetAnimation = (el, duration) => {
+const resetAnimation = (el: HTMLElement, duration: number) => {
   const currAnim = el.style.animation;
   el.style.animation = 'none';
-  // eslint-disable-next-line no-unused-expressions
   el.offsetWidth;
-  el.style.top = 0;
-  el.style.left = 0;
+  el.style.top = '0';
+  el.style.left = '0';
   el.style.animation = currAnim;
   el.style.animationDuration = `${duration}s`;
 };
 
-const Emote = ({ url, speed, size, onBounce }) => {
-  const [dimensions, setDimensions] = useState({ width: 100, height: 100 });
+type Props = {
+  url: string;
+  speed: number;
+  size: number;
+  onBounce: () => void;
+};
 
-  const animRefH = useRef();
-  const animRefV = useRef();
+function Emote({ url, speed, size, onBounce }: Props) {
+  const [dimensions, setDimensions] = useState<[number, number]>([100, 100]);
+
+  const animRefH = createRef<HTMLDivElement>();
+  const animRefV = createRef<HTMLDivElement>();
 
   useEffect(() => {
-    let image = new Image();
+    const image = new Image();
     image.src = url;
     image.onload = () => {
       const aspectRatio = image.width / image.height;
@@ -35,16 +41,16 @@ const Emote = ({ url, speed, size, onBounce }) => {
 
       if (image.width > maxWidth) {
         const scaleFactor = maxWidth / image.width;
-        setDimensions({ height: image.height * scaleFactor, width: maxWidth });
+        setDimensions([image.height * scaleFactor, maxWidth]);
       } else {
-        setDimensions({ height: size, width: size * aspectRatio });
+        setDimensions([size, size * aspectRatio]);
       }
     };
   }, [url, size]);
 
   useEffect(() => {
-    const animH = animRefH.current;
-    const animV = animRefV.current;
+    const animH = animRefH.current as HTMLDivElement;
+    const animV = animRefV.current as HTMLDivElement;
 
     const durationX = getDurationX(speed * 3);
     const durationY = getDurationY(speed * 3);
@@ -79,7 +85,7 @@ const Emote = ({ url, speed, size, onBounce }) => {
     <div
       className="anim-wrapper-h"
       ref={animRefH}
-      style={{ width: `${dimensions.width}px` }}
+      style={{ width: `${dimensions[0]}px` }}
     >
       <div className="anim-wrapper-v" ref={animRefV}>
         <img
@@ -87,13 +93,13 @@ const Emote = ({ url, speed, size, onBounce }) => {
           src={url}
           alt="Emote"
           style={{
-            width: `${dimensions.width}px`,
-            height: `${dimensions.height}px`,
+            width: `${dimensions[0]}px`,
+            height: `${dimensions[1]}px`,
           }}
         />
       </div>
     </div>
   );
-};
+}
 
 export default Emote;
