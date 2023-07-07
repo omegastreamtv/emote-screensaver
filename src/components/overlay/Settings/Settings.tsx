@@ -4,13 +4,13 @@ import GalleryMenu from './GalleryMenu';
 import Gallery from './Gallery';
 import GeneralSettings from './general/GeneralSettings';
 import { SettingsAction } from '@/util/hooks/useOverlaySettings';
-import { getStorageKey } from '@/util/settings/overlay';
+import { storeSettings } from '@/util/settings/overlay';
 import { OverlaySettings } from '@/util/types';
 
 type Props = {
   data: OverlaySettings;
-  update: React.Dispatch<SettingsAction>;
   visible: boolean;
+  update: React.Dispatch<SettingsAction>;
   show: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
@@ -26,9 +26,7 @@ function Settings({ data, update, visible, show }: Props) {
   };
 
   const saveAndClose = () => {
-    const storageKey = getStorageKey(data.channelName as string);
-    localStorage.setItem(storageKey, JSON.stringify(data));
-
+    storeSettings(data.channelName, data);
     show(false);
   };
 

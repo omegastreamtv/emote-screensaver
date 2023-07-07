@@ -1,7 +1,12 @@
-import { Emote, GroupKey, OverlaySettings as Settings } from '../types';
+'use client';
 
-const defaults: Settings = {
-  channelName: null,
+import { useEffect, useReducer } from 'react';
+import { useSearchParams, type ReadonlyURLSearchParams } from 'next/navigation';
+import { settingsReducer } from '../hooks/useOverlaySettings';
+import type { Emote, GroupKey, OverlaySettings as Settings } from '../types';
+
+const DEFAULTS: Settings = {
+  channelName: '',
   textSize: 48,
   emoteSize: 100,
   emoteSpeed: 50,
@@ -10,95 +15,86 @@ const defaults: Settings = {
   emotes: [],
 };
 
+export function useOverlaySettings(emotes: Emote[], channelName: string) {
+  const params = useSearchParams();
+  const [settings, updateSettings] = useReducer(settingsReducer, DEFAULTS);
+
+  useEffect(() => {
+    const storedSettings = loadSettings(channelName);
+
+    let newSettings: Settings = Object.assign({}, DEFAULTS, {
+      channelName: channelName,
+    } as Settings);
+
+    if (!storedSettings) {
+      newSettings = Object.assign(newSettings, {
+        emotes: emotes.map((emote) => {
+          emote.selected = emoteSelectedInParams(params, emote);
+          return emote;
+        }),
+      } as Settings);
+    } else {
+      const updatedEmotes = emotes.map((emote) => {
+        emote.selected =
+          emoteSelectedInParams(params, emote) ||
+          emoteSelectedInStorage(storedSettings, emote);
+        return emote;
+      });
+
+      newSettings = Object.assign(newSettings, storedSettings, {
+        emotes: updatedEmotes,
+      } as Settings);
+    }
+
+    updateSettings({ type: 'setAll', value: newSettings });
+  }, []);
+
+  useEffect(() => {
+    storeSettings(channelName, settings);
+  }, [settings]);
+
+  return [settings, updateSettings] as const;
+}
+
 export function getStorageKey(channelName: string) {
   return `settings-${channelName}`;
 }
 
-export function getStoredSettings(channelName: string): Settings | undefined {
-  const storageKey = getStorageKey(channelName);
-  const _storedSettings = localStorage.getItem(storageKey);
+export function loadSettings(channelName: string): Settings | undefined {
+  if (typeof window !== 'undefined') {
+    const storageKey = getStorageKey(channelName);
+    const _storedSettings = localStorage.getItem(storageKey);
 
-  if (_storedSettings) {
-    return JSON.parse(_storedSettings);
+    if (_storedSettings) {
+      return JSON.parse(_storedSettings);
+    }
   }
 }
 
-function loadSettings(emotes: Emote[], channelName: string) {
-  const params = getParams();
-  const storedSettings = getStoredSettings(channelName);
-
-  let settings: Settings = Object.assign({}, defaults, {
-    channelName,
-  } as Settings);
-
-  if (!storedSettings) {
-    settings = Object.assign(settings, {
-      emotes: emotes.map((emote) => {
-        emote.selected = emoteSelectedInParams(params, emote);
-        return emote;
-      }),
-    } as Settings);
-  } else {
-    const updatedEmotes = emotes.map((emote) => {
-      emote.selected =
-        emoteSelectedInParams(params, emote) ||
-        emoteSelectedInStorage(storedSettings, emote);
-      return emote;
-    });
-
-    settings = Object.assign(settings, storedSettings, {
-      emotes: updatedEmotes,
-    } as Settings);
+export function storeSettings(channelName: string, settings: Partial<Settings>) {
+  if (typeof window !== 'undefined') {
+    const storageKey = getStorageKey(channelName);
+    const currentSettings = loadSettings(channelName);
+    const newSettings = Object.assign({}, currentSettings, settings);
+    localStorage.setItem(storageKey, JSON.stringify(newSettings));
   }
-
-  const storageKey = getStorageKey(channelName);
-  localStorage.setItem(storageKey, JSON.stringify(settings));
-
-  return settings;
 }
 
-function getParams() {
-  const params = new URLSearchParams(window.location.search);
-
-  return {
-    zw: getParam(params, 'zw'),
-    twitch: {
-      channel: getParam(params, 'twitch'),
-    },
-    bttv: {
-      channel: getParam(params, 'bttv'),
-      global: getParam(params, 'bttvg'),
-    },
-    ffz: {
-      channel: getParam(params, 'ffz'),
-      global: getParam(params, 'ffzg'),
-    },
-    '7tv': {
-      channel: getParam(params, '7tv'),
-      global: getParam(params, '7tvg'),
-    },
-  };
-}
-
-function getParam(params: URLSearchParams, param: GroupKey) {
-  if (params.has(param)) {
-    const val = params.get(param);
-    return val === 'true' || val === '1';
-  }
-
-  return false;
-}
-
-function emoteSelectedInParams(params: ReturnType<typeof getParams>, emote: Emote) {
+function emoteSelectedInParams(params: ReadonlyURLSearchParams, emote: Emote) {
   if (emote.zeroWidth) {
-    return params.zw;
+    return !!params.get('zw');
   }
 
   if (emote.service === 'twitch') {
-    return params.twitch.channel;
+    return !!params.get('twitch');
   }
 
-  return params[emote.service][emote.scope];
+  if (emote.scope === 'global') {
+    const param: GroupKey = `${emote.service}g`;
+    return !!params.get(param);
+  }
+
+  return !!params.get(emote.service);
 }
 
 function emoteSelectedInStorage(currentSettings: Settings, emote: Emote) {
@@ -108,5 +104,3 @@ function emoteSelectedInStorage(currentSettings: Settings, emote: Emote) {
 
   return storedEmote?.selected || false;
 }
-
-export default loadSettings;

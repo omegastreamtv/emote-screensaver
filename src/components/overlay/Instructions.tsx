@@ -1,22 +1,17 @@
 'use client';
 
-import { Dispatch } from 'react';
 import { Button } from 'react-bootstrap';
 import { SettingsAction } from '@/util/hooks/useOverlaySettings';
-import { getStorageKey, getStoredSettings } from '@/util/settings/overlay';
+import { storeSettings } from '@/util/settings/overlay';
 
 type Props = {
   channelName: string;
-  update: Dispatch<SettingsAction>;
+  update: React.Dispatch<SettingsAction>;
 };
 
 const Instructions = ({ channelName, update }: Props) => {
   const hide = () => {
-    const settings = getStoredSettings(channelName);
-    const storageKey = getStorageKey(channelName);
-
-    localStorage.setItem(storageKey, JSON.stringify({ ...settings, showHelp: false }));
-
+    storeSettings(channelName, { showHelp: false });
     update({ type: 'showHelp', value: false });
   };
 
