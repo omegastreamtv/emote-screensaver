@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Button, Form, InputGroup } from 'react-bootstrap';
 import HomeSettings from './Settings';
 import { getTwitchId } from '@/util/channel';
-import { getParamString } from '@/util/settings/home';
+import { getParamString } from '@/util/hooks/useHomeSettings';
 
 function HomeForm() {
   const [channelName, setChannelName] = useState('');
