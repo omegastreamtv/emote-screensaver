@@ -1,3 +1,5 @@
+'use client';
+
 import { Dispatch } from 'react';
 import { Button } from 'react-bootstrap';
 import { SettingsAction } from '@/util/hooks/useOverlaySettings';

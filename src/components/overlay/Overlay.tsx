@@ -1,9 +1,9 @@
 'use client';
 
 import { useReducer, useState, useEffect } from 'react';
-import Emote from '@/components/Overlay/Emote';
+import Emote from './Emote';
 import Instructions from './Instructions';
-import Settings from '@/components/Overlay/Settings/Settings';
+import Settings from './settings/Settings';
 import loadSettings from '@/util/settings/overlay';
 import { useEmote } from '@/util/hooks/useEmote';
 import { settingsReducer } from '@/util/hooks/useOverlaySettings';
