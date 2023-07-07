@@ -1,7 +1,7 @@
 'use client';
 
 import { Form } from 'react-bootstrap';
-import { useHomeSettings } from '@/util/settings/home';
+import { useHomeSettings } from '@/util/hooks/useHomeSettings';
 import emoteGroups from '@/util/emoteGroups';
 import { GroupKey, HomeSettings } from '@/util/types';
 
