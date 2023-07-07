@@ -56,11 +56,11 @@ export function useOverlaySettings(emotes: Emote[], channelName: string) {
   return [settings, updateSettings] as const;
 }
 
-export function getStorageKey(channelName: string) {
+function getStorageKey(channelName: string) {
   return `settings-${channelName}`;
 }
 
-export function loadSettings(channelName: string): Settings | undefined {
+function loadSettings(channelName: string): Settings | undefined {
   if (typeof window !== 'undefined') {
     const storageKey = getStorageKey(channelName);
     const _storedSettings = localStorage.getItem(storageKey);
@@ -71,7 +71,7 @@ export function loadSettings(channelName: string): Settings | undefined {
   }
 }
 
-export function storeSettings(channelName: string, settings: Partial<Settings>) {
+function storeSettings(channelName: string, settings: Partial<Settings>) {
   if (typeof window !== 'undefined') {
     const storageKey = getStorageKey(channelName);
     const currentSettings = loadSettings(channelName);

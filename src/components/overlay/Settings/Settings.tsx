@@ -3,7 +3,6 @@ import { Modal, Button } from 'react-bootstrap';
 import GalleryMenu from './GalleryMenu';
 import Gallery from './Gallery';
 import GeneralSettings from './general/GeneralSettings';
-import { storeSettings } from '@/util/hooks/useOverlaySettings';
 import type { SettingsAction } from '@/util/hooks/settingsReducer';
 import type { OverlaySettings } from '@/util/types';
 
@@ -26,7 +25,7 @@ function Settings({ data, update, visible, show }: Props) {
   };
 
   const saveAndClose = () => {
-    storeSettings(data.channelName, data);
+    update({ type: 'setAll', value: data });
     show(false);
   };
 
