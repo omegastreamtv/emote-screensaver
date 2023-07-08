@@ -1,5 +1,7 @@
 import { Form } from 'react-bootstrap';
 import Setting from './Setting';
+import type { OverlaySettings } from '@/util/types';
+import type { SettingsAction } from '@/util/hooks/settingsReducer';
 
 const SPEED_MIN = 5;
 const SPEED_MAX = 200;
@@ -7,19 +9,31 @@ const SPEED_MAX = 200;
 const SIZE_MIN = 20;
 const SIZE_MAX = 300;
 
-const scaleVal = (number, inMin, inMax, outMin, outMax) =>
-  ((number - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
-const modifySpeedIn = (val) => scaleVal(val, SPEED_MIN, SPEED_MAX, 0, 100);
-const modifySizeIn = (val) => scaleVal(val, SIZE_MIN, SIZE_MAX, 0, 100);
+type Props = {
+  data: OverlaySettings;
+  update: React.Dispatch<SettingsAction>;
+};
 
-const GeneralSettings = ({ data, update }) => {
-  const modifySpeedOut = (val) =>
+const scaleVal = (
+  number: number,
+  inMin: number,
+  inMax: number,
+  outMin: number,
+  outMax: number
+) => ((number - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
+
+const modifySpeedIn = (val: number) => scaleVal(val, SPEED_MIN, SPEED_MAX, 0, 100);
+
+const modifySizeIn = (val: number) => scaleVal(val, SIZE_MIN, SIZE_MAX, 0, 100);
+
+function GeneralSettings({ data, update }: Props) {
+  const modifySpeedOut = (val: number) =>
     update({
       type: 'setEmoteSpeed',
       value: scaleVal(val, 0, 100, SPEED_MIN, SPEED_MAX),
     });
 
-  const modifySizeOut = (val) =>
+  const modifySizeOut = (val: number) =>
     update({
       type: 'setEmoteSize',
       value: scaleVal(val, 0, 100, SIZE_MIN, SIZE_MAX),
@@ -30,19 +44,19 @@ const GeneralSettings = ({ data, update }) => {
       <Setting label="Emote size">
         <Form.Range
           value={modifySizeIn(data.emoteSize)}
-          onChange={(e) => modifySizeOut(e.target.value)}
+          onChange={(e) => modifySizeOut(Number(e.target.value))}
         />
       </Setting>
       <Setting label="Emote speed">
         <Form.Range
           value={modifySpeedIn(data.emoteSpeed)}
-          onChange={(e) => modifySpeedOut(e.target.value)}
+          onChange={(e) => modifySpeedOut(Number(e.target.value))}
         />
       </Setting>
       <Setting label="Text size">
         <Form.Range
           value={data.textSize}
-          onChange={(e) => update({ type: 'setTextSize', value: e.target.value })}
+          onChange={(e) => update({ type: 'setTextSize', value: Number(e.target.value) })}
         />
       </Setting>
       <Setting>
@@ -55,6 +69,6 @@ const GeneralSettings = ({ data, update }) => {
       </Setting>
     </div>
   );
-};
+}
 
 export default GeneralSettings;
