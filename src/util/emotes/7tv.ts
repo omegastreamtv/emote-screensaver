@@ -3,7 +3,9 @@ import { Emote } from '@/util/types';
 type EmoteRes = {
   id: string;
   name: string;
-  flags: number;
+  data: {
+    flags: number;
+  };
 };
 
 type ChannelRes = {
@@ -29,7 +31,7 @@ export async function getChannelEmotes(channelId: string) {
     url: getCdnUrl(e.id),
     service: '7tv',
     scope: 'channel',
-    zeroWidth: e.flags === 1 << 8,
+    zeroWidth: e.data.flags === 1 << 8,
     selected: true,
   }));
 
@@ -45,7 +47,7 @@ export async function getGlobalEmotes() {
     url: getCdnUrl(e.id),
     service: '7tv',
     scope: 'global',
-    zeroWidth: e.flags === 1 << 8,
+    zeroWidth: e.data.flags === 1 << 8,
     selected: false,
   }));
 
