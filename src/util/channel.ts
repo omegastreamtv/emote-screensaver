@@ -10,9 +10,7 @@ type UserError = {
 type UserResponse = UserData | UserError;
 
 export const getTwitchId = async (channelName: string) => {
-  const res = await fetch(
-    `https://api.retpaladinbot.com/twitch/id?user=${channelName}`
-  );
+  const res = await fetch(`https://api.retpaladinbot.com/twitch/id?user=${channelName}`);
 
   if (res.ok) {
     const data: UserResponse = await res.json();

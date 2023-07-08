@@ -29,18 +29,14 @@ function HomeForm() {
       const channelId = await getTwitchId(channelName);
 
       if (channelId) {
-        router.push(
-          `/channel/${channelName}${settingsActive ? getParamString() : ''}`
-        );
+        router.push(`/channel/${channelName}${settingsActive ? getParamString() : ''}`);
       } else {
         setValidating(false);
         setValidationText("That Twitch channel doesn't exist.");
       }
     } catch {
       setValidating(false);
-      setValidationText(
-        'Unable to lookup Twitch channel. Try again in a minute.'
-      );
+      setValidationText('Unable to lookup Twitch channel. Try again in a minute.');
     }
   };
 
