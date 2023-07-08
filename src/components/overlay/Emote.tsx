@@ -43,7 +43,7 @@ function Emote({ url, speed, size, onBounce }: Props) {
         const scaleFactor = maxWidth / image.width;
         setDimensions([image.height * scaleFactor, maxWidth]);
       } else {
-        setDimensions([size, size * aspectRatio]);
+        setDimensions([size * aspectRatio, size]);
       }
     };
   }, [url, size]);
