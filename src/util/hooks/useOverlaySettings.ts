@@ -35,9 +35,7 @@ export function useOverlaySettings(emotes: Emote[], channelName: string) {
       } as Settings);
     } else {
       const updatedEmotes = emotes.map((emote) => {
-        emote.selected =
-          emoteSelectedInParams(params, emote) ||
-          emoteSelectedInStorage(storedSettings, emote);
+        emote.selected = emoteSelectedInStorage(storedSettings, emote);
         return emote;
       });
 
