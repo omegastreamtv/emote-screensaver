@@ -1,26 +1,22 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Emote from './Emote';
 import Instructions from './Instructions';
 import Settings from './settings/Settings';
 import { useOverlaySettings } from '@/util/hooks/useOverlaySettings';
 import { useEmote } from '@/util/hooks/useEmote';
-import { Emote as EmoteType } from '@/util/types';
+import { Emote as TEmote } from '@/util/types';
 
 type Props = {
   channelName: string;
-  emotes: EmoteType[];
+  emotes: TEmote[];
 };
 
 function Overlay({ channelName, emotes }: Props) {
   const [settings, updateSettings] = useOverlaySettings(emotes, channelName);
   const [emote, changeEmote] = useEmote(settings.emotes);
   const [settingsActive, showSettings] = useState(false);
-
-  useEffect(() => {
-    changeEmote();
-  }, []);
 
   return (
     <div id="overlay">
