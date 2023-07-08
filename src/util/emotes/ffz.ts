@@ -10,7 +10,7 @@ type ChannelRes = EmoteRes[];
 type GlobalRes = EmoteRes[];
 
 function getCdnUrl(id: string) {
-  return `https://cdn.betterttv.net/emote/${id}/3x`;
+  return `https://cdn.frankerfacez.com/emoticon/${id}/2`;
 }
 
 export async function getChannelEmotes(channelId: string) {
