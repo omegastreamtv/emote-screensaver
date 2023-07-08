@@ -1,13 +1,25 @@
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Accordion } from 'react-bootstrap';
 import GalleryGroup from './GalleryGroup';
+import type { Emote, Scope, Service } from '@/util/types';
 
-const EmoteGallery = ({ emotes, toggleEmote }) => {
-  const [groups, setGroups] = useState([]);
+type Props = {
+  emotes: Emote[];
+  toggleEmote: (idx: number) => void;
+};
+
+type Group = {
+  service: Service;
+  scope: Scope;
+  emotes: Emote[];
+  idxOffset: number;
+};
+
+function EmoteGallery({ emotes, toggleEmote }: Props) {
+  const [groups, setGroups] = useState<Group[]>([]);
 
   useEffect(() => {
-    let groups = [];
+    const groups = [];
     let newGroupStartIdx = 0;
 
     for (let i = 0; i < emotes.length; i++) {
@@ -43,6 +55,6 @@ const EmoteGallery = ({ emotes, toggleEmote }) => {
       ))}
     </Accordion>
   );
-};
+}
 
 export default EmoteGallery;

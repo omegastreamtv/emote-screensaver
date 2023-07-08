@@ -19,6 +19,10 @@ function Settings({ data, update, visible, show }: Props) {
     [data.emotes]
   );
 
+  const toggleEmote = (idx: number) => {
+    update({ type: 'toggleEmote', value: idx });
+  };
+
   const showHelp = () => {
     show(false);
     update({ type: 'showHelp', value: true });
@@ -46,21 +50,17 @@ function Settings({ data, update, visible, show }: Props) {
         <GeneralSettings data={data} update={update} />
         <h4 className="mt-4 border-bottom">Emotes</h4>
         <p className="text-body">
-          These are all the Twitch sub, BTTV, FFZ, and 7TV emotes you have. Select the
-          emotes you want in to appear in the overlay.
+          These are all the Twitch, BTTV, FFZ, and 7TV emotes you have. Select the emotes
+          you want in to appear in the overlay.
         </p>
         <GalleryMenu update={update} />
-        <Gallery
-          emotes={data.emotes}
-          toggleEmote={(idx: number) =>
-            update({ type: 'toggleEmote', value: idx })
-          }
-        />
+        <Gallery emotes={data.emotes} toggleEmote={toggleEmote} />
       </Modal.Body>
       <Modal.Footer className="justify-content-between">
         <span className="text-link" onClick={() => showHelp()}>
           Show help
         </span>
+        {warning && <p className="text-danger">{warning}</p>}
         <Button variant="primary" disabled={!allowSave} onClick={() => saveAndClose()}>
           Save &amp; Close
         </Button>
