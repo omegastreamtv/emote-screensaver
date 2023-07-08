@@ -1,7 +1,14 @@
 import { Dropdown, DropdownButton } from 'react-bootstrap';
+import { Scope, Service } from '@/util/types';
 
-const EmoteGroupDropdown = ({ title, toggle, channelOnly }) => {
-  const service = title.toLowerCase();
+type Props = {
+  title: string;
+  toggle: (service: Service, scope: Scope, value: boolean) => void;
+  channelOnly?: boolean;
+};
+
+function EmoteGroupDropdown({ title, toggle, channelOnly }: Props) {
+  const service = title.toLowerCase() as Service;
 
   return (
     <DropdownButton title={title} size="sm" className="d-inline-block mt-2 me-2">
@@ -23,6 +30,6 @@ const EmoteGroupDropdown = ({ title, toggle, channelOnly }) => {
       )}
     </DropdownButton>
   );
-};
+}
 
 export default EmoteGroupDropdown;
