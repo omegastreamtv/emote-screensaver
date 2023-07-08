@@ -15,7 +15,7 @@ type Group = {
   idxOffset: number;
 };
 
-function EmoteGallery({ emotes, toggleEmote }: Props) {
+function Gallery({ emotes, toggleEmote }: Props) {
   const [groups, setGroups] = useState<Group[]>([]);
 
   useEffect(() => {
@@ -57,4 +57,4 @@ function EmoteGallery({ emotes, toggleEmote }: Props) {
   );
 }
 
-export default EmoteGallery;
+export default Gallery;

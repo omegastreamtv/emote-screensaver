@@ -53,14 +53,13 @@ function Settings({ data, update, visible, show }: Props) {
           These are all the Twitch, BTTV, FFZ, and 7TV emotes you have. Select the emotes
           you want in to appear in the overlay.
         </p>
-        <GalleryMenu update={update} />
+        <GalleryMenu emotes={data.emotes} update={update} />
         <Gallery emotes={data.emotes} toggleEmote={toggleEmote} />
       </Modal.Body>
       <Modal.Footer className="justify-content-between">
         <span className="text-link" onClick={() => showHelp()}>
           Show help
         </span>
-        {warning && <p className="text-danger">{warning}</p>}
         <Button variant="primary" disabled={!allowSave} onClick={() => saveAndClose()}>
           Save &amp; Close
         </Button>
