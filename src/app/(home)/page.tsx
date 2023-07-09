@@ -11,7 +11,7 @@ function Index() {
       <HomeForm />
       <div className="footer body-text text-black-50 text-center">
         <Link
-          href="https://github.com/Mahcks/YEAHBUTDVDs"
+          href="https://github.com/omegastreamtv/YEAHBUTDVDs"
           target="_blank"
           rel="noreferrer"
           prefetch={false}
