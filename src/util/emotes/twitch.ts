@@ -11,7 +11,7 @@ type ChannelRes = {
 };
 
 export async function getChannelEmotes(channelId: string) {
-  const res = await fetch(`https://api.retpaladinbot.com/twitch/emotes?id=${channelId}`);
+  const res = await fetch(`http://itsathirdpartything.com/twitch/emotes/${channelId}`);
   const data: ChannelRes = await res.json();
 
   const emotes: Emote[] = data.data.map((e: EmoteRes) => ({
