@@ -12,19 +12,7 @@ export const metadata = {
 function HomeLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body>
-        <main
-          id="home"
-          className="d-flex justify-content-center align-items-center vw-100 vh-100"
-        >
-          <div id="content">
-            <div className="mb-5">
-              <img src="https://i.imgur.com/Nu9SaDH.png" alt="YEAHBUTDVDS" />
-            </div>
-            {children}
-          </div>
-        </main>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
