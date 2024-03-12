@@ -52,7 +52,7 @@ export function getParamString() {
   }
 
   return (
-    '?' +
+    '&' +
     Object.entries(settings)
       .filter((x) => x[1])
       .flatMap((x) => `${x[0]}=${x[1]}`)

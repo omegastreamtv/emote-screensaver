@@ -29,7 +29,9 @@ function HomeForm() {
       const channelId = await getTwitchId(channelName);
 
       if (channelId) {
-        router.push(`/channel/${channelName}${settingsActive ? getParamString() : ''}`);
+        router.push(
+          `/channel/?name=${channelName}` + (settingsActive ? getParamString() : '')
+        );
       } else {
         setValidating(false);
         setValidationText("That Twitch channel doesn't exist.");
