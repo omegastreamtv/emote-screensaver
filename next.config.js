@@ -6,7 +6,7 @@ const isProd = process.env.NODE_ENV === 'production';
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
-  assetPrefix: isProd ? 'https://yeahbutdvds.com' : undefined,
+  basePath: isProd ? '/YEAHBUTDVDs' : '',
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
