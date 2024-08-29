@@ -1,5 +1,6 @@
-import HomeForm from '@/components/home/Form';
+import Image from 'next/image';
 import Link from 'next/link';
+import HomeForm from '@/components/home/Form';
 
 function Index() {
   return (
@@ -9,7 +10,7 @@ function Index() {
     >
       <div id="content">
         <div className="mb-5">
-          <img src="https://i.imgur.com/Nu9SaDH.png" alt="YEAHBUTDVDS" />
+          <Image src="/images/logo.png" alt="YEAHBUTDVDs" width={300} height={75} />
         </div>
         <h4 className="mb-5 text-center">
           Generate a DVD-style bouncing emote overlay for your Twitch stream with a single
