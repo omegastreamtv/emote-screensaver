@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 import '@/styles/index.scss';
 
@@ -24,6 +25,7 @@ function RootLayout({ children }: Readonly<React.PropsWithChildren>) {
   return (
     <html lang="en">
       <body>{children}</body>
+      <GoogleAnalytics gaId="G-XQYWC05W0V" />
     </html>
   );
 }
