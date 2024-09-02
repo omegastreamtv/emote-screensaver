@@ -47,6 +47,7 @@ function Settings({ data, update, visible, show }: Props) {
         <Modal.Title>Settings</Modal.Title>
       </Modal.Header>
       <Modal.Body>
+        <h4 className="border-bottom">General</h4>
         <GeneralSettings data={data} update={update} />
         <h4 className="mt-4 border-bottom">Emotes</h4>
         <p className="text-body">
