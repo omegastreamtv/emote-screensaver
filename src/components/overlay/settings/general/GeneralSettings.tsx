@@ -54,18 +54,27 @@ function GeneralSettings({ data, update }: Props) {
           onChange={(e) => modifySpeedOut(Number(e.target.value))}
         />
       </Setting>
-      <Setting label="Text size">
-        <Form.Range
-          value={data.textSize}
-          onChange={(e) =>
-            update({ type: 'setTextSize', value: Number(e.target.value) })
-          }
-        />
-      </Setting>
-      <Setting>
-        <Form.Check
-          type="switch"
-          label="Enable newly added emotes by default"
+      <div className="setting-group d-flex gap-2">
+        <Setting label="Show name">
+          <Form.Switch
+            checked={data.showName}
+            onChange={(e) =>
+              update({ type: 'showName', value: e.target.checked })
+            }
+          />
+        </Setting>
+        <Setting label="Name size">
+          <Form.Range
+            value={data.nameSize}
+            disabled={!data.showName}
+            onChange={(e) =>
+              update({ type: 'setNameSize', value: Number(e.target.value) })
+            }
+          />
+        </Setting>
+      </div>
+      <Setting label="Enable newly added emotes by default">
+        <Form.Switch
           checked={data.emoteDefault}
           onChange={(e) =>
             update({ type: 'setEmoteDefault', value: e.target.checked })

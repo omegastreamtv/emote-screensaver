@@ -6,12 +6,17 @@ type SetAllAction = {
 };
 
 type SetNumericAction = {
-  type: 'setTextSize' | 'setEmoteSize' | 'setEmoteSpeed' | 'toggleEmote';
+  type: 'setNameSize' | 'setEmoteSize' | 'setEmoteSpeed' | 'toggleEmote';
   value: number;
 };
 
 type SetBooleanAction = {
-  type: 'setEmoteDefault' | 'showHelp' | 'toggleAllEmotes' | 'toggleZeroWidth';
+  type:
+    | 'showName'
+    | 'setEmoteDefault'
+    | 'showHelp'
+    | 'toggleAllEmotes'
+    | 'toggleZeroWidth';
   value: boolean;
 };
 
@@ -35,8 +40,10 @@ export const settingsReducer: React.Reducer<OverlaySettings, SettingsAction> = (
   switch (action.type) {
     case 'setAll':
       return { ...action.value };
-    case 'setTextSize':
-      return { ...state, textSize: action.value };
+    case 'showName':
+      return { ...state, showName: action.value };
+    case 'setNameSize':
+      return { ...state, nameSize: action.value };
     case 'setEmoteSize':
       return { ...state, emoteSize: action.value };
     case 'setEmoteSpeed':

@@ -32,13 +32,15 @@ function Overlay({ channelName, emotes }: Props) {
         onClick={() => showSettings(true)}
         disabled={settings.showHelp}
       />
-      <h1
-        id="emote-name"
-        className="position-absolute start-50 translate-middle-x drop-shadow"
-        style={{ fontSize: `${settings.textSize}pt` }}
-      >
-        {emote?.name}
-      </h1>
+      {settings.showName && (
+        <h1
+          id="emote-name"
+          className="position-absolute start-50 translate-middle-x drop-shadow"
+          style={{ fontSize: `${settings.nameSize}pt` }}
+        >
+          {emote?.name}
+        </h1>
+      )}
       {settings.showHelp && <Instructions update={updateSettings} />}
       {emote && (
         <Emote

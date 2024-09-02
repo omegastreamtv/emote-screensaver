@@ -7,7 +7,8 @@ import type { Emote, GroupKey, OverlaySettings as Settings } from '../types';
 
 const DEFAULTS: Settings = {
   channelName: '',
-  textSize: 48,
+  showName: true,
+  nameSize: 48,
   emoteSize: 100,
   emoteSpeed: 50,
   emoteDefault: true,

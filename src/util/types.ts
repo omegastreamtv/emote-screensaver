@@ -7,7 +7,8 @@ export type HomeSettings = Record<GroupKey, boolean>;
 
 export type OverlaySettings = {
   channelName: string;
-  textSize: number;
+  showName: boolean;
+  nameSize: number;
   emoteSize: number;
   emoteSpeed: number;
   emoteDefault: boolean;

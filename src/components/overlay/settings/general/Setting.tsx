@@ -1,15 +1,14 @@
 import { Form } from 'react-bootstrap';
 
-type Props = {
+type Props = React.PropsWithChildren & {
   label?: string;
-  children: JSX.Element;
 };
 
 function Setting({ label, children }: Props) {
   return (
-    <div className="general-setting">
+    <div className="setting">
       {label && <Form.Label>{label}</Form.Label>}
-      {children}
+      <div className="d-flex">{children}</div>
     </div>
   );
 }
