@@ -41,7 +41,7 @@ function GeneralSettings({ data, update }: Props) {
     });
 
   return (
-    <div className="d-flex flex-wrap">
+    <div className="settings d-flex flex-column gap-3">
       <Setting label="Emote size">
         <Form.Range
           value={modifySizeIn(data.emoteSize)}

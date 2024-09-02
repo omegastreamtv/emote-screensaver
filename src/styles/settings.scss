@@ -8,13 +8,29 @@
   }
 }
 
-.general-setting {
-  width: 100%;
-
-  label {
-    flex: 1 0 auto;
-    padding-right: 20px;
+.settings {
+  & > .setting {
+    width: 100%;
   }
+
+  .setting {
+    label {
+      display: block;
+    }
+
+    .form-range {
+      margin-bottom: 0;
+      max-width: 200px
+    }
+  }
+
+  .setting-group {
+    width: 100%;
+  }
+}
+
+.setting-group {
+  width: 100%;
 }
 
 #gallery-menu {
