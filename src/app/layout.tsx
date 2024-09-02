@@ -1,15 +1,26 @@
+import { Metadata } from 'next';
+
 import '@/styles/index.scss';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'YEAHBUTDVDS',
   description:
-    'Generate a DVD-style bouncing emote overlay for your Twitch stream with a single click.',
-  alternates: {
-    canonical: 'https://yeahbutdvds.com',
-  },
+    'Generate a DVD-style bouncing emote overlay for your live stream with a single click.',
+  keywords: [
+    'overlay',
+    'emote',
+    'bounce',
+    'livestream',
+    'streaming',
+    'OBS',
+    'Twitch',
+    'YouTube',
+  ],
+  authors: [{ name: 'OmegaStream' }],
+  metadataBase: new URL(process.env.NEXT_PUBLIC_URL || ''),
 };
 
-function HomeLayout({ children }: { children: React.ReactNode }) {
+function RootLayout({ children }: Readonly<React.PropsWithChildren>) {
   return (
     <html lang="en">
       <body>{children}</body>
@@ -17,4 +28,4 @@ function HomeLayout({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default HomeLayout;
+export default RootLayout;
