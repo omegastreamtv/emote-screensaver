@@ -19,7 +19,13 @@ type Props = {
   toggleEmote: (idx: number) => void;
 };
 
-function GalleryGroup({ service, scope, emotes, idxOffset, toggleEmote }: Props) {
+function GalleryGroup({
+  service,
+  scope,
+  emotes,
+  idxOffset,
+  toggleEmote,
+}: Props) {
   const [contentVisible, showContent] = useState(false);
 
   const content =

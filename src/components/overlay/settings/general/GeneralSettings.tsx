@@ -22,7 +22,8 @@ const scaleVal = (
   outMax: number
 ) => ((number - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
 
-const modifySpeedIn = (val: number) => scaleVal(val, SPEED_MIN, SPEED_MAX, 0, 100);
+const modifySpeedIn = (val: number) =>
+  scaleVal(val, SPEED_MIN, SPEED_MAX, 0, 100);
 
 const modifySizeIn = (val: number) => scaleVal(val, SIZE_MIN, SIZE_MAX, 0, 100);
 
@@ -56,7 +57,9 @@ function GeneralSettings({ data, update }: Props) {
       <Setting label="Text size">
         <Form.Range
           value={data.textSize}
-          onChange={(e) => update({ type: 'setTextSize', value: Number(e.target.value) })}
+          onChange={(e) =>
+            update({ type: 'setTextSize', value: Number(e.target.value) })
+          }
         />
       </Setting>
       <Setting>
@@ -64,7 +67,9 @@ function GeneralSettings({ data, update }: Props) {
           type="switch"
           label="Enable newly added emotes by default"
           checked={data.emoteDefault}
-          onChange={(e) => update({ type: 'setEmoteDefault', value: e.target.checked })}
+          onChange={(e) =>
+            update({ type: 'setEmoteDefault', value: e.target.checked })
+          }
         />
       </Setting>
     </div>

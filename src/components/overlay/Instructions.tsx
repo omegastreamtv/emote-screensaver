@@ -23,16 +23,16 @@ function Instructions({ update }: Props) {
           Add a new browser source to OBS using your personalized channel URL.
         </li>
         <li className="body-text">
-          With the new source selected, click the "interact" button to view the page in
-          interactive mode.
+          With the new source selected, click the "interact" button to view the
+          page in interactive mode.
         </li>
         <li className="body-text">
           Click anywhere on the screen to open and change your settings.
         </li>
       </ol>
       <p className="body-text mb-3">
-        Leave the option "Shutdown source when not visible" unchecked or the page will
-        reset after switching scenes.
+        Leave the option "Shutdown source when not visible" unchecked or the
+        page will reset after switching scenes.
       </p>
       <Button onClick={hide}>Got it!</Button>
     </div>

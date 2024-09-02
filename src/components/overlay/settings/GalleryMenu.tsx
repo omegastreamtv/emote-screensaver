@@ -11,7 +11,8 @@ type Props = {
 
 function GalleryMenu({ emotes, update }: Props) {
   const emoteGroupExists = useCallback(
-    (service: Service) => emotes.filter((e) => e.service === service).length > 0,
+    (service: Service) =>
+      emotes.filter((e) => e.service === service).length > 0,
     [emotes]
   );
 
@@ -41,7 +42,11 @@ function GalleryMenu({ emotes, update }: Props) {
           Deselect All
         </Button>
       </ButtonGroup>
-      <EmoteGroupDropdown title="Twitch" toggle={toggleEmoteGroup} channelOnly />
+      <EmoteGroupDropdown
+        title="Twitch"
+        toggle={toggleEmoteGroup}
+        channelOnly
+      />
       {emoteGroupExists('7tv') && (
         <EmoteGroupDropdown title="7TV" toggle={toggleEmoteGroup} />
       )}
@@ -52,8 +57,14 @@ function GalleryMenu({ emotes, update }: Props) {
         <EmoteGroupDropdown title="FFZ" toggle={toggleEmoteGroup} />
       )}
       {zwEmotesExist && (
-        <DropdownButton title="Zero-Width" size="sm" className="d-inline-block mt-2 me-2">
-          <Dropdown.Item onClick={() => update({ type: 'toggleZeroWidth', value: true })}>
+        <DropdownButton
+          title="Zero-Width"
+          size="sm"
+          className="d-inline-block mt-2 me-2"
+        >
+          <Dropdown.Item
+            onClick={() => update({ type: 'toggleZeroWidth', value: true })}
+          >
             Select all
           </Dropdown.Item>
           <Dropdown.Item

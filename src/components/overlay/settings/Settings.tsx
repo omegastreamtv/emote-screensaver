@@ -50,8 +50,8 @@ function Settings({ data, update, visible, show }: Props) {
         <GeneralSettings data={data} update={update} />
         <h4 className="mt-4 border-bottom">Emotes</h4>
         <p className="text-body">
-          These are all the Twitch, BTTV, FFZ, and 7TV emotes you have. Select the emotes
-          you want in to appear in the overlay.
+          These are all the Twitch, BTTV, FFZ, and 7TV emotes you have. Select
+          the emotes you want in to appear in the overlay.
         </p>
         <GalleryMenu emotes={data.emotes} update={update} />
         <Gallery emotes={data.emotes} toggleEmote={toggleEmote} />
@@ -60,7 +60,11 @@ function Settings({ data, update, visible, show }: Props) {
         <span className="text-link" onClick={() => showHelp()}>
           Show help
         </span>
-        <Button variant="primary" disabled={!allowSave} onClick={() => saveAndClose()}>
+        <Button
+          variant="primary"
+          disabled={!allowSave}
+          onClick={() => saveAndClose()}
+        >
           Save &amp; Close
         </Button>
       </Modal.Footer>

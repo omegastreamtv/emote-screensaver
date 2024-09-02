@@ -45,11 +45,12 @@ export const settingsReducer: React.Reducer<OverlaySettings, SettingsAction> = (
       return { ...state, emoteDefault: action.value };
     case 'showHelp':
       return { ...state, showHelp: action.value };
-    case 'toggleEmote':
+    case 'toggleEmote': {
       const emotes = [...state.emotes];
       emotes[action.value].selected = !emotes[action.value].selected;
 
       return { ...state, emotes };
+    }
     case 'toggleAllEmotes':
       return {
         ...state,

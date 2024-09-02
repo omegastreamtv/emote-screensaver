@@ -19,7 +19,9 @@ function getCdnUrl(id: string) {
 }
 
 export async function getChannelEmotes(channelId: string) {
-  const res = await fetch(`https://api.betterttv.net/3/cached/users/twitch/${channelId}`);
+  const res = await fetch(
+    `https://api.betterttv.net/3/cached/users/twitch/${channelId}`
+  );
   const { channelEmotes, sharedEmotes }: ChannelRes = await res.json();
   const allEmotes = [...channelEmotes, ...sharedEmotes];
 

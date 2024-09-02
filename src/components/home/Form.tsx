@@ -30,7 +30,8 @@ function HomeForm() {
 
       if (channelId) {
         router.push(
-          `/channel/?name=${channelName}` + (settingsActive ? getParamString() : '')
+          `/channel/?name=${channelName}` +
+            (settingsActive ? getParamString() : '')
         );
       } else {
         setValidating(false);
@@ -38,7 +39,9 @@ function HomeForm() {
       }
     } catch {
       setValidating(false);
-      setValidationText('Unable to lookup Twitch channel. Try again in a minute.');
+      setValidationText(
+        'Unable to lookup Twitch channel. Try again in a minute.'
+      );
     }
   };
 

@@ -10,11 +10,16 @@ function Index() {
     >
       <div id="content">
         <div className="mb-5">
-          <Image src="/images/logo.png" alt="YEAHBUTDVDs" width={300} height={75} />
+          <Image
+            src="/images/logo.png"
+            alt="YEAHBUTDVDs"
+            width={300}
+            height={75}
+          />
         </div>
         <h4 className="mb-5 text-center">
-          Generate a DVD-style bouncing emote overlay for your Twitch stream with a single
-          click.
+          Generate a DVD-style bouncing emote overlay for your Twitch stream
+          with a single click.
         </h4>
         <HomeForm />
         <div className="footer body-text text-black-50 text-center">
