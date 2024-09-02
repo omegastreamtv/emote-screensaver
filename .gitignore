@@ -2,25 +2,16 @@
 
 # dependencies
 /node_modules
-/.pnp
-.pnp.js
 
-# testing
-/coverage
+# cache
+/.next
 
 # production
-/build
 /out
 
-# misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+# environment
+.env.*local
 
-npm-debug.log*
+# logging
 yarn-debug.log*
 yarn-error.log*
-
-/.next
