@@ -4,9 +4,9 @@ import { GoogleAnalytics } from '@next/third-parties/google';
 import '@/styles/index.scss';
 
 export const metadata: Metadata = {
-  title: 'YEAHBUTDVDS',
+  title: 'Emote Screensaver',
   description:
-    'Generate a DVD-style bouncing emote overlay for your live stream with a single click.',
+    'A livestream overlay generator that displays a random emote from a channel in bouncing DVD screensaver style.',
   keywords: [
     'overlay',
     'emote',

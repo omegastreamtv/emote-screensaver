@@ -18,8 +18,8 @@ function Index() {
           />
         </div>
         <h4 className="mb-5 text-center">
-          Generate a DVD-style bouncing emote overlay for your Twitch stream
-          with a single click.
+          Generate a DVD-style bouncing emote overlay for your live stream with
+          a single click.
         </h4>
         <HomeForm />
         <div className="footer body-text text-black-50 text-center">
