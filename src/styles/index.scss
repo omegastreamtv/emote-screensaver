@@ -34,16 +34,35 @@ img {
   width: 500px;
 }
 
-#home .footer {
-  img {
-    width: 30px;
-    display: inline-block;
+#home {
+  .header {
+    border: 5px solid #0d6efd;
+    border-radius: 20px;
+    height: 200px;
+    width: 200px;
+    margin: 0 auto;
+    padding: 20px;
+
+    h3 {
+      color: #0d6efd;
+    }
+
+    img {
+      width: initial;
+    }
   }
 
-  .inline-icon {
-    width: 22px;
-    display: inline-block;
-    margin-top: -5px;
+  .footer {
+    img {
+      width: 30px;
+      display: inline-block;
+    }
+
+    .inline-icon {
+      width: 22px;
+      display: inline-block;
+      margin-top: -5px;
+    }
   }
 }
 

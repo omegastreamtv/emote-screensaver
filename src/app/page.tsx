@@ -9,12 +9,15 @@ function Index() {
       className="d-flex justify-content-center align-items-center vw-100 vh-100"
     >
       <div id="content">
-        <div className="mb-5">
+        <div className="header mb-5">
+          <h3 className="mb-0">Emote</h3>
+          <h3 className="mb-5">Screensaver</h3>
           <Image
-            src="/images/logo.png"
+            src="/images/LUL.png"
             alt="YEAHBUTDVDs"
-            width={300}
-            height={75}
+            width={40}
+            height={40}
+            className="ml-2"
           />
         </div>
         <h4 className="mb-5 text-center">
