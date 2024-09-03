@@ -14,7 +14,7 @@ function Index() {
           <h3 className="mb-5">Screensaver</h3>
           <Image
             src={`${process.env.BASE_PATH || ''}/images/LUL.png`}
-            alt="YEAHBUTDVDs"
+            alt="LUL"
             width={40}
             height={40}
             className="ml-2"
