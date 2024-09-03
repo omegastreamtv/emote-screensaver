@@ -30,10 +30,6 @@ jobs:
           cache: yarn
       - name: Install dependencies
         run: yarn install
-      - name: Configure for Pages
-        uses: actions/configure-pages@v4
-        with:
-          static_site_generator: next
       - name: Run linter
         run: yarn lint
       - name: Run formatter
@@ -42,6 +38,7 @@ jobs:
         run: yarn build
         env:
           NEXT_PUBLIC_URL: ${{ vars.NEXT_PUBLIC_URL }}
+          BASE_PATH: ${{ vars.BASE_PATH }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
