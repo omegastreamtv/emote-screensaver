@@ -29,6 +29,7 @@ jobs:
           node-version: '20'
           cache: yarn
       - name: Configure for Pages
+        id: configure_pages
         uses: actions/configure-pages@v4
         with:
           static_site_generator: next
@@ -48,8 +49,8 @@ jobs:
       - name: Build
         run: yarn build
         env:
-          NEXT_PUBLIC_URL: ${{ vars.NEXT_PUBLIC_URL }}
-          BASE_PATH: ${{ vars.BASE_PATH }}
+          BASE_URL: ${{ steps.configure_pages.outputs.base_url }}
+          BASE_PATH: ${{ steps.configure_pages.outputs.base_path }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

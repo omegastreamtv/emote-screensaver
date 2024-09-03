@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     'YouTube',
   ],
   authors: [{ name: 'OmegaStream' }],
-  metadataBase: new URL(process.env.NEXT_PUBLIC_URL as string),
+  metadataBase: new URL(process.env.BASE_URL as string),
 };
 
 function RootLayout({ children }: Readonly<React.PropsWithChildren>) {
