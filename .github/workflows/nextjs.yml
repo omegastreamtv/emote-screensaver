@@ -3,6 +3,7 @@ name: Deploy to Pages
 on:
   push:
     branches: ['main']
+    paths-ignore: ['.md']
   workflow_dispatch:
 
 permissions:
@@ -17,6 +18,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_URL: ${{ env.NEXT_PUBLIC_URL }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -24,17 +27,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'yarn'
+          cache: yarn
       - name: Install dependencies
         run: yarn install
       - name: Configure for Pages
         uses: actions/configure-pages@v4
         with:
           static_site_generator: next
-      - name: Setup environment
-        run: |
-          touch .env.local
-          echo NEXT_PUBLIC_URL=${{ env.NEXT_PUBLIC_URL }} >> .env.local
       - name: Run linter
         run: yarn lint
       - name: Run formatter
