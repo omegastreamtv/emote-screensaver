@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy to Pages
 
 on:
   push:
@@ -27,7 +27,7 @@ jobs:
           cache: 'yarn'
       - name: Install dependencies
         run: yarn install
-      - name: Setup Pages
+      - name: Configure for Pages
         uses: actions/configure-pages@v4
         with:
           static_site_generator: next
@@ -35,20 +35,10 @@ jobs:
         run: |
           touch .env.local
           echo NEXT_PUBLIC_URL=${{ env.NEXT_PUBLIC_URL }} >> .env.local
-
-  check:
-    needs: setup
-    runs-on: ubuntu-latest
-    steps:
-      - name: Lint
+      - name: Run linter
         run: yarn lint
-      - name: Format
+      - name: Run formatter
         run: yarn format:check
-
-  build:
-    needs: check
-    runs-on: ubuntu-latest
-    steps:
       - name: Build with Next.js
         run: yarn build
       - name: Upload artifact
@@ -63,6 +53,6 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy to GitHub Pages
+      - name: Deploy to Pages
         id: deployment
         uses: actions/deploy-pages@v4
