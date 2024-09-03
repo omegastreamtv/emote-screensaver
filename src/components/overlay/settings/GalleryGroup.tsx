@@ -43,7 +43,7 @@ function GalleryGroup({
 
   return (
     <Accordion.Item className="gallery-group" eventKey={service + scope}>
-      <Accordion.Header className="group-title">{`${properNames[service]} (${properNames[scope]})`}</Accordion.Header>
+      <Accordion.Header className="group-title">{`${properNames[service]} (${properNames[scope]}) – ${emotes.length}`}</Accordion.Header>
       <Accordion.Body onEnter={() => showContent(true)} className="emote-group">
         {content}
       </Accordion.Body>
