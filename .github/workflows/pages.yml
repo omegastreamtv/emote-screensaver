@@ -19,7 +19,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      NEXT_PUBLIC_URL: ${{ env.NEXT_PUBLIC_URL }}
+      NEXT_PUBLIC_URL: ${{ vars.NEXT_PUBLIC_URL }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
