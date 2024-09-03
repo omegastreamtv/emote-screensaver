@@ -16,6 +16,8 @@ export type OverlaySettings = {
   emotes: Emote[];
 };
 
+export type StoredSettings = OverlaySettings & { emotes: string[] };
+
 export type Emote = {
   name: string;
   url: string;

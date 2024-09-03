@@ -3,9 +3,14 @@
 import { useEffect, useReducer } from 'react';
 import { useSearchParams, type ReadonlyURLSearchParams } from 'next/navigation';
 import { settingsReducer } from './settingsReducer';
-import type { Emote, GroupKey, OverlaySettings as Settings } from '../types';
+import type {
+  Emote,
+  GroupKey,
+  OverlaySettings,
+  StoredSettings,
+} from '../types';
 
-const DEFAULTS: Settings = {
+const DEFAULTS: OverlaySettings = {
   channelName: '',
   showName: true,
   nameSize: 48,
@@ -22,10 +27,9 @@ export function useOverlaySettings(emotes: Emote[], channelName: string) {
 
   useEffect(() => {
     const storedSettings = loadSettings(channelName);
-
-    let newSettings: Settings = Object.assign({}, DEFAULTS, {
+    let newSettings: OverlaySettings = Object.assign({}, DEFAULTS, {
       channelName,
-    } as Settings);
+    } as OverlaySettings);
 
     if (!storedSettings) {
       newSettings = Object.assign(newSettings, {
@@ -33,7 +37,7 @@ export function useOverlaySettings(emotes: Emote[], channelName: string) {
           emote.selected = emoteSelectedInParams(params, emote);
           return emote;
         }),
-      } as Settings);
+      } as OverlaySettings);
 
       storeSettings(newSettings);
     } else {
@@ -44,7 +48,7 @@ export function useOverlaySettings(emotes: Emote[], channelName: string) {
 
       newSettings = Object.assign(newSettings, storedSettings, {
         emotes: updatedEmotes,
-      } as Settings);
+      } as OverlaySettings);
     }
 
     updateSettings({ type: 'setAll', value: newSettings });
@@ -57,7 +61,7 @@ function getStorageKey(channelName: string) {
   return `settings-${channelName}`;
 }
 
-function loadSettings(channelName: string): Settings | undefined {
+function loadSettings(channelName: string): StoredSettings | undefined {
   if (typeof window !== 'undefined') {
     const storageKey = getStorageKey(channelName);
     const _storedSettings = localStorage.getItem(storageKey);
@@ -68,10 +72,15 @@ function loadSettings(channelName: string): Settings | undefined {
   }
 }
 
-export function storeSettings(settings: Partial<Settings>) {
+export function storeSettings(settings: Partial<OverlaySettings>) {
   if (typeof window !== 'undefined' && settings.channelName) {
     const storageKey = getStorageKey(settings.channelName);
-    localStorage.setItem(storageKey, JSON.stringify(settings));
+    const storedSettings = {
+      ...settings,
+      emotes: settings.emotes?.filter((e) => e.selected).map((e) => e.name),
+    } as StoredSettings;
+
+    localStorage.setItem(storageKey, JSON.stringify(storedSettings));
   }
 }
 
@@ -92,10 +101,9 @@ function emoteSelectedInParams(params: ReadonlyURLSearchParams, emote: Emote) {
   return !!params.get(emote.service);
 }
 
-function emoteSelectedInStorage(currentSettings: Settings, emote: Emote) {
-  const storedEmote = currentSettings.emotes.find(
-    (savedEmote) => savedEmote.name === emote.name
-  );
-
-  return storedEmote?.selected || false;
+function emoteSelectedInStorage(
+  currentSettings: StoredSettings,
+  emote: Emote
+): boolean {
+  return currentSettings.emotes.indexOf(emote.name) > -1;
 }

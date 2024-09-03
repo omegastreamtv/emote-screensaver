@@ -1,3 +1,4 @@
+import { updateIn } from 'immutable';
 import { OverlaySettings, Service, Scope } from '@/util/types';
 
 type SetAllAction = {
@@ -52,12 +53,12 @@ export const settingsReducer: React.Reducer<OverlaySettings, SettingsAction> = (
       return { ...state, emoteDefault: action.value };
     case 'showHelp':
       return { ...state, showHelp: action.value };
-    case 'toggleEmote': {
-      const emotes = [...state.emotes];
-      emotes[action.value].selected = !emotes[action.value].selected;
-
-      return { ...state, emotes };
-    }
+    case 'toggleEmote':
+      return updateIn(
+        state,
+        ['emotes', action.value, 'selected'],
+        (selected) => !selected
+      );
     case 'toggleAllEmotes':
       return {
         ...state,
