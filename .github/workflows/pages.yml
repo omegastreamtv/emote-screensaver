@@ -3,7 +3,7 @@ name: Deploy to Pages
 on:
   push:
     branches: ['main']
-    paths-ignore: ['.md']
+    paths-ignore: ['**.md', '.github/**']
   workflow_dispatch:
 
 permissions:
@@ -28,6 +28,17 @@ jobs:
         with:
           node-version: '20'
           cache: yarn
+      - name: Configure for Pages
+        uses: actions/configure-pages@v4
+        with:
+          static_site_generator: next
+      - name: Restore cache
+        uses: actions/cache@v4
+        with:
+          path: .next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('yarn.lock') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('yarn.lock') }}-
       - name: Install dependencies
         run: yarn install
       - name: Run linter
