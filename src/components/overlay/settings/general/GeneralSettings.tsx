@@ -54,7 +54,7 @@ function GeneralSettings({ data, update }: Props) {
           onChange={(e) => modifySpeedOut(Number(e.target.value))}
         />
       </Setting>
-      <div className="setting-group d-flex gap-2">
+      <div className="setting-group d-flex gap-4">
         <Setting label="Show name">
           <Form.Switch
             checked={data.showName}
@@ -73,7 +73,7 @@ function GeneralSettings({ data, update }: Props) {
           />
         </Setting>
       </div>
-      <Setting label="Enable newly added emotes by default">
+      <Setting label="Enable new emotes by default">
         <Form.Switch
           checked={data.emoteDefault}
           onChange={(e) =>
