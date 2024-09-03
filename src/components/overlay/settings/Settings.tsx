@@ -1,10 +1,12 @@
 import { useMemo } from 'react';
 import { Modal, Button } from 'react-bootstrap';
+
+import type { SettingsAction } from '@/util/hooks/settingsReducer';
+import { storeSettings } from '@/util/hooks/useOverlaySettings';
+import type { OverlaySettings } from '@/util/types';
+import GeneralSettings from './general/GeneralSettings';
 import GalleryMenu from './GalleryMenu';
 import Gallery from './Gallery';
-import GeneralSettings from './general/GeneralSettings';
-import type { SettingsAction } from '@/util/hooks/settingsReducer';
-import type { OverlaySettings } from '@/util/types';
 
 type Props = {
   data: OverlaySettings;
@@ -29,7 +31,7 @@ function Settings({ data, update, visible, show }: Props) {
   };
 
   const saveAndClose = () => {
-    update({ type: 'setAll', value: data });
+    storeSettings(data);
     show(false);
   };
 

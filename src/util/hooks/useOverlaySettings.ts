@@ -24,7 +24,7 @@ export function useOverlaySettings(emotes: Emote[], channelName: string) {
     const storedSettings = loadSettings(channelName);
 
     let newSettings: Settings = Object.assign({}, DEFAULTS, {
-      channelName: channelName,
+      channelName,
     } as Settings);
 
     if (!storedSettings) {
@@ -34,6 +34,8 @@ export function useOverlaySettings(emotes: Emote[], channelName: string) {
           return emote;
         }),
       } as Settings);
+
+      storeSettings(newSettings);
     } else {
       const updatedEmotes = emotes.map((emote) => {
         emote.selected = emoteSelectedInStorage(storedSettings, emote);
@@ -47,10 +49,6 @@ export function useOverlaySettings(emotes: Emote[], channelName: string) {
 
     updateSettings({ type: 'setAll', value: newSettings });
   }, []);
-
-  useEffect(() => {
-    storeSettings(channelName, settings);
-  }, [settings]);
 
   return [settings, updateSettings] as const;
 }
@@ -70,12 +68,10 @@ function loadSettings(channelName: string): Settings | undefined {
   }
 }
 
-function storeSettings(channelName: string, settings: Partial<Settings>) {
-  if (typeof window !== 'undefined') {
-    const storageKey = getStorageKey(channelName);
-    const currentSettings = loadSettings(channelName);
-    const newSettings = Object.assign({}, currentSettings, settings);
-    localStorage.setItem(storageKey, JSON.stringify(newSettings));
+export function storeSettings(settings: Partial<Settings>) {
+  if (typeof window !== 'undefined' && settings.channelName) {
+    const storageKey = getStorageKey(settings.channelName);
+    localStorage.setItem(storageKey, JSON.stringify(settings));
   }
 }
 
